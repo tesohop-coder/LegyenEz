@@ -131,15 +131,31 @@ class VideoGenerationService:
             )
             
             # Generate audio with API v3 (supports speed parameter)
-            logger.info(f"Generating TTS audio with ElevenLabs API v3 (speed: {speed}x)...")
-            response = self.eleven_client.text_to_speech.convert(
-                text=text,
-                voice_id=self.elevenlabs_voice_id,
-                model_id="eleven_turbo_v2_5",  # Latest stable model
-                voice_settings=settings,
-                output_format="mp3_44100_128",
-                seed=42  # Fixed seed for consistent first variation
-            )
+            # Try with custom voice first, fallback to Rachel if it fails
+            logger.info(f"Generating TTS audio with ElevenLabs API v3 (voice: {self.elevenlabs_voice_id}, speed: {speed}x)...")
+            
+            try:
+                response = self.eleven_client.text_to_speech.convert(
+                    text=text,
+                    voice_id=self.elevenlabs_voice_id,
+                    model_id="eleven_turbo_v2_5",  # Latest stable model
+                    voice_settings=settings,
+                    output_format="mp3_44100_128",
+                    seed=42  # Fixed seed for consistent first variation
+                )
+            except Exception as voice_error:
+                logger.warning(f"Failed to generate TTS with voice {self.elevenlabs_voice_id}: {voice_error}")
+                logger.info("Falling back to default voice (Rachel: 21m00Tcm4TlvDq8ikWAM)...")
+                
+                # Fallback to Rachel voice
+                response = self.eleven_client.text_to_speech.convert(
+                    text=text,
+                    voice_id="21m00Tcm4TlvDq8ikWAM",  # Rachel (default fallback)
+                    model_id="eleven_turbo_v2_5",
+                    voice_settings=settings,
+                    output_format="mp3_44100_128",
+                    seed=42
+                )
             
             # Note: Speed is applied via model capabilities in v3
             # If speed adjustment needed, we can post-process with FFmpeg
