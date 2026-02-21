@@ -276,8 +276,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         Apply volume ducking to music when TTS is playing.
         """
         # Force style settings - using \an5 inline for PERFECT CENTER
-        # FontSize=55 for better visibility
-        force_style = "FontName=Arial,FontSize=55,PrimaryColour=&H00FFFFFF,OutlineColour=&H40000000,BackColour=&H00000000,Bold=1,BorderStyle=1,Outline=2,Shadow=3,MarginL=0,MarginR=0,MarginV=0"
+        # FontSize=66, Poppins ExtraBold, Outline=6, Shadow=23 (screenshot alapján)
+        force_style = "FontName=Poppins ExtraBold,FontSize=66,PrimaryColour=&H00FFFFFF,OutlineColour=&H40000000,BackColour=&H00000000,Bold=1,BorderStyle=1,Outline=6,Shadow=23,MarginL=0,MarginR=0,MarginV=0"
         
         cmd = [
             'ffmpeg',
