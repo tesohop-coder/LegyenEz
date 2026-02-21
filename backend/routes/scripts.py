@@ -21,8 +21,9 @@ from database import db
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# Initialize OpenAI client
-openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Initialize OpenAI client (optional - only if API key is set)
+openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_client = AsyncOpenAI(api_key=openai_api_key) if openai_api_key else None
 
 @router.post("/generate-optimized")
 async def generate_optimized_script(request: OptimizedScriptRequest, current_user = Depends(get_current_user)):
