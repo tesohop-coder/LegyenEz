@@ -56,6 +56,13 @@ async def generate_optimized_script(request: OptimizedScriptRequest, current_use
             )
             logger.info("Using standard script generation")
         
+        # Check if OpenAI client is available
+        if not openai_client:
+            raise HTTPException(
+                status_code=503, 
+                detail="OpenAI API key not configured. Please set OPENAI_API_KEY environment variable."
+            )
+        
         # Call OpenAI
         response = await openai_client.chat.completions.create(
             model=os.getenv("LLM_MODEL", "gpt-4o-mini"),
@@ -149,6 +156,13 @@ async def generate_script(request: ScriptGenerateRequest, current_user = Depends
         system_prompt, user_prompt = generate_german_script_prompt(
             topic, request.keywords, request.mode
         )
+        
+        # Check if OpenAI client is available
+        if not openai_client:
+            raise HTTPException(
+                status_code=503, 
+                detail="OpenAI API key not configured. Please set OPENAI_API_KEY environment variable."
+            )
         
         # Call OpenAI
         response = await openai_client.chat.completions.create(
