@@ -154,10 +154,10 @@ class FFmpegService:
         # Key settings:
         # - Alignment=5: MIDDLE CENTER (perfect center like Canva)
         # - PlayResX/Y: 1080x1920 (portrait Full HD)
-        # - FontSize=66 (updated from 50)
-        # - FontName=Poppins ExtraBold (vagy Arial Black fallback)
-        # - Outline=6 (text outline vastagság)
-        # - Shadow=23 (shadow distance a screenshot alapján)
+        # - FontSize=66
+        # - FontName=Poppins ExtraBold
+        # - Outline=3 (finomabb text outline - csökkentve 6-ról)
+        # - Shadow=8 (enyhe árnyék - csökkentve 23-ról, elegánsabb megjelenés)
         ass_content = """[Script Info]
 Title: Karaoke Subtitles
 ScriptType: v4.00+
@@ -168,7 +168,8 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,Poppins ExtraBold,66,&H00FFFFFF,&H00FFFFFF,&H40000000,&H00000000,1,0,0,0,100,100,0,0,1,6,23,5,20,20,0,1
+Style: Default,Poppins ExtraBold,66,&H00FFFFFF,&H00FFFFFF,&H40000000,&H00000000,1,0,0,0,100,100,0,0,1,3,8,5,20,20,0,1
+
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
