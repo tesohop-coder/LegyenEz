@@ -233,14 +233,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 # Using {\c&HBBGGRR&} format
                 # YELLOW = &H00FFFF (BGR)
                 # WHITE = &HFFFFFF (BGR)
+                # All text is UPPERCASE
                 parts = []
                 for i, wt in enumerate(group):
                     if i == idx:
-                        # CURRENT word - YELLOW
-                        parts.append("{\\c&H00FFFF&}" + wt['word'])
+                        # CURRENT word - YELLOW - UPPERCASE
+                        parts.append("{\\c&H00FFFF&}" + wt['word'].upper())
                     else:
-                        # Other words - WHITE  
-                        parts.append("{\\c&HFFFFFF&}" + wt['word'])
+                        # Other words - WHITE - UPPERCASE
+                        parts.append("{\\c&HFFFFFF&}" + wt['word'].upper())
                 
                 # Add \an5 tag to FORCE middle-center alignment
                 line_text = "{\\an5}" + " ".join(parts)
