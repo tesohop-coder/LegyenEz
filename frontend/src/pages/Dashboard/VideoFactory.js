@@ -603,12 +603,12 @@ export default function VideoFactory() {
         <div className="space-y-4">
           <Card className="bg-zinc-900/50 border-zinc-800 sticky top-6">
             <CardHeader>
-              <CardTitle className="text-white">Generált Videók</CardTitle>
+              <CardTitle className="text-white">{t('generated_videos')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 max-h-[800px] overflow-y-auto">
               {videos.length === 0 ? (
                 <p className="text-zinc-500 text-center py-4">
-                  Még nincs videó generálva
+                  {t('no_videos')}
                 </p>
               ) : (
                 videos.map(video => (
@@ -639,7 +639,7 @@ export default function VideoFactory() {
                         className="w-full bg-green-600 hover:bg-green-700"
                       >
                         <Download size={16} className="mr-1" />
-                        Letöltés
+                        {t('download')}
                       </Button>
                     )}
 
