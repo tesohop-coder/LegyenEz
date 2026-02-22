@@ -235,17 +235,17 @@ export default function VideoFactory() {
 
       clearTimeout(timeoutId);
 
-      toast.success('🎬 Videó generálás elindult! Háttérben fut, használhatod az oldalt közben. Ellenőrzés 10 másodpercenként...');
+      toast.success(t('video_generation_started'));
       
       // Immediate refresh to show "queued" status
       fetchVideos();
     } catch (error) {
       if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
         // Timeout - but video might still be queued
-        toast.warning('⏱️ Az API hívás túllépte az időkorlátot, de a videó generálás valószínűleg elindult. Nézd meg a videók listáját!');
+        toast.warning(t('video_generation_timeout'));
         fetchVideos();
       } else {
-        toast.error(error.response?.data?.detail || 'Videó generálás sikertelen');
+        toast.error(error.response?.data?.detail || t('video_generation_failed'));
       }
     } finally {
       setGenerating(false);
