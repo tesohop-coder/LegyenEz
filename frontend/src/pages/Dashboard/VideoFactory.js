@@ -329,10 +329,10 @@ export default function VideoFactory() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label className="text-zinc-300">Válassz scriptet</Label>
+                <Label className="text-zinc-300">{t('select_script_label')}</Label>
                 <Select value={selectedScript} onValueChange={setSelectedScript} disabled={isEditingScript}>
                   <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white mt-1">
-                    <SelectValue placeholder="Válassz egy scriptet..." />
+                    <SelectValue placeholder={t('select_script_prompt')} />
                   </SelectTrigger>
                   <SelectContent className="bg-zinc-800 border-zinc-700 max-h-[300px]">
                     {scripts.map(script => (
