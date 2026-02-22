@@ -106,15 +106,17 @@ export default function Analytics() {
               </div>
             </div>
 
-            {/* Comments Card */}
-            <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/10 border-l-4 border-l-green-400 border border-green-500/20 rounded-xl p-4 hover:border-green-400/40 transition-all duration-300">
+            {/* Engagement Card */}
+            <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-l-4 border-l-amber-400 border border-amber-500/20 rounded-xl p-4 hover:border-amber-400/40 transition-all duration-300">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-green-500/20 rounded-lg border border-green-400/30">
-                  <MessageCircle className="text-green-400" size={20} />
+                <div className="p-2.5 bg-amber-500/20 rounded-lg border border-amber-400/30">
+                  <Sparkles className="text-amber-400" size={20} />
                 </div>
                 <div>
-                  <p className="text-zinc-400 text-xs font-medium">{t('total_comments')}</p>
-                  <p className="text-green-100 text-xl font-bold">{(overview.total_comments || 0).toLocaleString()}</p>
+                  <p className="text-zinc-400 text-xs font-medium">Engagement</p>
+                  <p className="text-amber-100 text-xl font-bold">
+                    {((overview.total_likes + overview.total_comments) / Math.max(overview.total_views, 1) * 100).toFixed(1)}%
+                  </p>
                 </div>
               </div>
             </div>
@@ -132,17 +134,15 @@ export default function Analytics() {
               </div>
             </div>
 
-            {/* Engagement Card */}
-            <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-l-4 border-l-amber-400 border border-amber-500/20 rounded-xl p-4 hover:border-amber-400/40 transition-all duration-300">
+            {/* Comments Card */}
+            <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/10 border-l-4 border-l-green-400 border border-green-500/20 rounded-xl p-4 hover:border-green-400/40 transition-all duration-300">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-amber-500/20 rounded-lg border border-amber-400/30">
-                  <Sparkles className="text-amber-400" size={20} />
+                <div className="p-2.5 bg-green-500/20 rounded-lg border border-green-400/30">
+                  <MessageCircle className="text-green-400" size={20} />
                 </div>
                 <div>
-                  <p className="text-zinc-400 text-xs font-medium">Engagement</p>
-                  <p className="text-amber-100 text-xl font-bold">
-                    {((overview.total_likes + overview.total_comments) / Math.max(overview.total_views, 1) * 100).toFixed(1)}%
-                  </p>
+                  <p className="text-zinc-400 text-xs font-medium">{t('total_comments')}</p>
+                  <p className="text-green-100 text-xl font-bold">{(overview.total_comments || 0).toLocaleString()}</p>
                 </div>
               </div>
             </div>
