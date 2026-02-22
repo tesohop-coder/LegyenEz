@@ -338,16 +338,41 @@ class VideoGenerationService:
     ) -> List[Path]:
         """
         Search and download vertical B-roll clips from Pexels.
-        Clips should be 2-3 seconds each to match total duration.
-        QUALITY FILTER: Only HD, minimum 5s duration, curated content.
+        OPTIMIZED FOR CINEMATIC FAITH CONTENT:
+        - Golden hour lighting (warm tones)
+        - Spiritual/contemplative themes
+        - Consistent color grading
+        - Silhouettes and cinematic compositions
         """
         try:
             # Calculate number of clips needed (2.5s avg per clip)
             num_clips = int(total_duration / 2.5) + 2  # Extra clips for variety
             
-            # Enhance search query for faith content
-            if not search_query or search_query == "spirituality faith peaceful":
-                search_query = "faith prayer spiritual light hope peace nature"
+            # CINEMATIC FAITH SEARCH QUERIES - rotating for variety
+            # These create consistent visual style matching your channel
+            cinematic_queries = [
+                "golden hour sunset silhouette cinematic",
+                "spiritual light rays nature cinematic",
+                "sunset reflection water peaceful",
+                "sunrise hope landscape dramatic",
+                "silhouette person praying sunset",
+                "cinematic sky clouds dramatic light",
+                "peaceful nature golden hour",
+                "contemplative person alone sunset",
+                "spiritual journey cinematic",
+                "hope light darkness cinematic"
+            ]
+            
+            # Use custom query OR rotate through cinematic queries
+            if search_query and search_query not in ["spirituality faith peaceful", "faith prayer spiritual light hope peace nature"]:
+                # Add cinematic keywords to custom query
+                search_query = f"{search_query} cinematic golden hour"
+            else:
+                # Use cinematic rotation for consistent style
+                import random
+                search_query = random.choice(cinematic_queries)
+            
+            logger.info(f"🎬 Searching B-roll with CINEMATIC query: '{search_query}'")
             
             # Search Pexels for vertical videos with QUALITY FILTERS
             headers = {"Authorization": self.pexels_api_key}
@@ -355,7 +380,7 @@ class VideoGenerationService:
                 "query": search_query,
                 "orientation": "portrait",  # 9:16 vertical only
                 "size": "large",  # Large/HD only
-                "per_page": min(num_clips * 2, 30),  # Request more for filtering
+                "per_page": min(num_clips * 3, 40),  # Request MORE for strict filtering
                 "min_duration": 5,  # Minimum 5 seconds (quality indicator)
             }
             
