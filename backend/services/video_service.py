@@ -442,7 +442,7 @@ class VideoGenerationService:
             for idx, video in enumerate(quality_videos[:num_clips]):
                 video_files = video.get("video_files", [])
                 
-                # Find BEST quality vertical HD file
+                # Find BEST quality vertical HD file (1080p+ preferred)
                 hd_file = None
                 best_quality = 0
                 
@@ -450,18 +450,28 @@ class VideoGenerationService:
                     width = vf.get("width", 0)
                     height = vf.get("height", 0)
                     quality = vf.get("quality", "")
+                    fps = vf.get("fps", 30)
                     
                     # Must be vertical (height > width)
                     if height > width:
-                        # Prefer HD/FHD
+                        # Quality scoring for cinematic content
                         quality_score = 0
-                        if quality == "hd":
-                            quality_score = 2
-                        elif quality == "sd":
-                            quality_score = 1
                         
-                        # Also consider resolution
-                        quality_score += (width * height) / 1000000
+                        # Resolution (prefer 1080x1920 or higher)
+                        if width >= 1080 and height >= 1920:
+                            quality_score += 10  # Full HD vertical
+                        elif width >= 720 and height >= 1280:
+                            quality_score += 5   # HD vertical
+                        
+                        # Quality label
+                        if quality == "hd":
+                            quality_score += 5
+                        elif quality == "sd":
+                            quality_score += 2
+                        
+                        # FPS (30fps+ is smoother, more cinematic)
+                        if fps >= 30:
+                            quality_score += 2
                         
                         if quality_score > best_quality:
                             best_quality = quality_score
@@ -473,8 +483,9 @@ class VideoGenerationService:
                     )
                     if clip_path:
                         downloaded_clips.append(clip_path)
+                        logger.info(f"✅ Downloaded cinematic clip {idx+1}: {hd_file.get('width')}x{hd_file.get('height')} @ {hd_file.get('fps')}fps")
             
-            logger.info(f"Downloaded {len(downloaded_clips)} HIGH-QUALITY B-roll clips")
+            logger.info(f"🎬 Downloaded {len(downloaded_clips)} CINEMATIC B-roll clips for consistent visual style")
             return downloaded_clips
         
         except Exception as e:
