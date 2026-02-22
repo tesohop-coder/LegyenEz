@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse
 from typing import List, Optional
 import logging
 from pathlib import Path
+import asyncio
 
 from models import Video, VideoGenerateRequest
 from routes.auth import get_current_user
@@ -13,6 +14,9 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 video_service = VideoGenerationService()
+
+# Store for background tasks (in-memory for now, use Redis in production)
+background_video_tasks = {}
 
 @router.post("/generate")
 async def generate_video(

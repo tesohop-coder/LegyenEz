@@ -1,0 +1,71 @@
+[Script Info]
+Title: Karaoke Subtitles
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Poppins ExtraBold,66,&H00FFFFFF,&H00FFFFFF,&H40000000,&H00000000,1,0,0,0,100,100,0,0,1,3,8,5,20,20,0,1
+
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.60,Default,,0,0,0,,{\an5}{\c&H00FFFF&}MANCHMAL {\c&HFFFFFF&}FÜHLT {\c&HFFFFFF&}SICH {\c&HFFFFFF&}DAS
+Dialogue: 0,0:00:00.60,0:00:00.92,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}MANCHMAL {\c&H00FFFF&}FÜHLT {\c&HFFFFFF&}SICH {\c&HFFFFFF&}DAS
+Dialogue: 0,0:00:00.92,0:00:01.10,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}MANCHMAL {\c&HFFFFFF&}FÜHLT {\c&H00FFFF&}SICH {\c&HFFFFFF&}DAS
+Dialogue: 0,0:00:01.10,0:00:01.41,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}MANCHMAL {\c&HFFFFFF&}FÜHLT {\c&HFFFFFF&}SICH {\c&H00FFFF&}DAS
+Dialogue: 0,0:00:01.41,0:00:01.67,Default,,0,0,0,,{\an5}{\c&H00FFFF&}LEBEN {\c&HFFFFFF&}AN {\c&HFFFFFF&}WIE {\c&HFFFFFF&}EIN
+Dialogue: 0,0:00:01.67,0:00:02.01,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}LEBEN {\c&H00FFFF&}AN {\c&HFFFFFF&}WIE {\c&HFFFFFF&}EIN
+Dialogue: 0,0:00:02.01,0:00:02.16,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}LEBEN {\c&HFFFFFF&}AN {\c&H00FFFF&}WIE {\c&HFFFFFF&}EIN
+Dialogue: 0,0:00:02.16,0:00:02.46,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}LEBEN {\c&HFFFFFF&}AN {\c&HFFFFFF&}WIE {\c&H00FFFF&}EIN
+Dialogue: 0,0:00:02.46,0:00:02.87,Default,,0,0,0,,{\an5}{\c&H00FFFF&}TIEFER {\c&HFFFFFF&}FALL {\c&HFFFFFF&}IN {\c&HFFFFFF&}DIE
+Dialogue: 0,0:00:02.87,0:00:03.16,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}TIEFER {\c&H00FFFF&}FALL {\c&HFFFFFF&}IN {\c&HFFFFFF&}DIE
+Dialogue: 0,0:00:03.16,0:00:03.37,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}TIEFER {\c&HFFFFFF&}FALL {\c&H00FFFF&}IN {\c&HFFFFFF&}DIE
+Dialogue: 0,0:00:03.37,0:00:03.68,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}TIEFER {\c&HFFFFFF&}FALL {\c&HFFFFFF&}IN {\c&H00FFFF&}DIE
+Dialogue: 0,0:00:03.68,0:00:04.23,Default,,0,0,0,,{\an5}{\c&H00FFFF&}DUNKELHEIT {\c&HFFFFFF&}DIE {\c&HFFFFFF&}HOFFNUNG {\c&HFFFFFF&}SCHEINT
+Dialogue: 0,0:00:04.98,0:00:05.09,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}DUNKELHEIT {\c&H00FFFF&}DIE {\c&HFFFFFF&}HOFFNUNG {\c&HFFFFFF&}SCHEINT
+Dialogue: 0,0:00:05.09,0:00:05.59,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}DUNKELHEIT {\c&HFFFFFF&}DIE {\c&H00FFFF&}HOFFNUNG {\c&HFFFFFF&}SCHEINT
+Dialogue: 0,0:00:05.59,0:00:05.96,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}DUNKELHEIT {\c&HFFFFFF&}DIE {\c&HFFFFFF&}HOFFNUNG {\c&H00FFFF&}SCHEINT
+Dialogue: 0,0:00:05.96,0:00:06.55,Default,,0,0,0,,{\an5}{\c&H00FFFF&}VERLOREN {\c&HFFFFFF&}DIE {\c&HFFFFFF&}ZWEIFEL {\c&HFFFFFF&}RAUBEN
+Dialogue: 0,0:00:07.03,0:00:07.25,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}VERLOREN {\c&H00FFFF&}DIE {\c&HFFFFFF&}ZWEIFEL {\c&HFFFFFF&}RAUBEN
+Dialogue: 0,0:00:07.25,0:00:07.98,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}VERLOREN {\c&HFFFFFF&}DIE {\c&H00FFFF&}ZWEIFEL {\c&HFFFFFF&}RAUBEN
+Dialogue: 0,0:00:07.98,0:00:08.46,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}VERLOREN {\c&HFFFFFF&}DIE {\c&HFFFFFF&}ZWEIFEL {\c&H00FFFF&}RAUBEN
+Dialogue: 0,0:00:08.46,0:00:08.88,Default,,0,0,0,,{\an5}{\c&H00FFFF&}UNS {\c&HFFFFFF&}DEN {\c&HFFFFFF&}ATEM {\c&HFFFFFF&}DOCH
+Dialogue: 0,0:00:08.88,0:00:09.35,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}UNS {\c&H00FFFF&}DEN {\c&HFFFFFF&}ATEM {\c&HFFFFFF&}DOCH
+Dialogue: 0,0:00:09.35,0:00:09.64,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}UNS {\c&HFFFFFF&}DEN {\c&H00FFFF&}ATEM {\c&HFFFFFF&}DOCH
+Dialogue: 0,0:00:10.61,0:00:10.75,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}UNS {\c&HFFFFFF&}DEN {\c&HFFFFFF&}ATEM {\c&H00FFFF&}DOCH
+Dialogue: 0,0:00:10.75,0:00:10.93,Default,,0,0,0,,{\an5}{\c&H00FFFF&}IN {\c&HFFFFFF&}DIESEN {\c&HFFFFFF&}MOMENTEN {\c&HFFFFFF&}WENN
+Dialogue: 0,0:00:10.93,0:00:11.27,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}IN {\c&H00FFFF&}DIESEN {\c&HFFFFFF&}MOMENTEN {\c&HFFFFFF&}WENN
+Dialogue: 0,0:00:11.27,0:00:12.30,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}IN {\c&HFFFFFF&}DIESEN {\c&H00FFFF&}MOMENTEN {\c&HFFFFFF&}WENN
+Dialogue: 0,0:00:12.38,0:00:12.51,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}IN {\c&HFFFFFF&}DIESEN {\c&HFFFFFF&}MOMENTEN {\c&H00FFFF&}WENN
+Dialogue: 0,0:00:12.51,0:00:12.92,Default,,0,0,0,,{\an5}{\c&H00FFFF&}ALLES {\c&HFFFFFF&}ZERBRICHT {\c&HFFFFFF&}IST {\c&HFFFFFF&}DA
+Dialogue: 0,0:00:12.92,0:00:13.56,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}ALLES {\c&H00FFFF&}ZERBRICHT {\c&HFFFFFF&}IST {\c&HFFFFFF&}DA
+Dialogue: 0,0:00:14.01,0:00:14.15,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}ALLES {\c&HFFFFFF&}ZERBRICHT {\c&H00FFFF&}IST {\c&HFFFFFF&}DA
+Dialogue: 0,0:00:14.15,0:00:14.38,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}ALLES {\c&HFFFFFF&}ZERBRICHT {\c&HFFFFFF&}IST {\c&H00FFFF&}DA
+Dialogue: 0,0:00:14.38,0:00:14.64,Default,,0,0,0,,{\an5}{\c&H00FFFF&}EINE {\c&HFFFFFF&}STIMME {\c&HFFFFFF&}IN {\c&HFFFFFF&}DIR
+Dialogue: 0,0:00:14.64,0:00:14.89,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}EINE {\c&H00FFFF&}STIMME {\c&HFFFFFF&}IN {\c&HFFFFFF&}DIR
+Dialogue: 0,0:00:14.89,0:00:15.30,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}EINE {\c&HFFFFFF&}STIMME {\c&H00FFFF&}IN {\c&HFFFFFF&}DIR
+Dialogue: 0,0:00:15.30,0:00:15.50,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}EINE {\c&HFFFFFF&}STIMME {\c&HFFFFFF&}IN {\c&H00FFFF&}DIR
+Dialogue: 0,0:00:16.47,0:00:16.55,Default,,0,0,0,,{\an5}{\c&H00FFFF&}GLAUBE {\c&HFFFFFF&}WEITER {\c&HFFFFFF&}JEDER {\c&HFFFFFF&}SCHMERZ
+Dialogue: 0,0:00:16.55,0:00:17.07,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}GLAUBE {\c&H00FFFF&}WEITER {\c&HFFFFFF&}JEDER {\c&HFFFFFF&}SCHMERZ
+Dialogue: 0,0:00:18.51,0:00:18.65,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}GLAUBE {\c&HFFFFFF&}WEITER {\c&H00FFFF&}JEDER {\c&HFFFFFF&}SCHMERZ
+Dialogue: 0,0:00:18.65,0:00:19.31,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}GLAUBE {\c&HFFFFFF&}WEITER {\c&HFFFFFF&}JEDER {\c&H00FFFF&}SCHMERZ
+Dialogue: 0,0:00:19.85,0:00:19.97,Default,,0,0,0,,{\an5}{\c&H00FFFF&}JEDE {\c&HFFFFFF&}TRÄNE {\c&HFFFFFF&}TRÄGT {\c&HFFFFFF&}EINEN
+Dialogue: 0,0:00:19.97,0:00:20.53,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}JEDE {\c&H00FFFF&}TRÄNE {\c&HFFFFFF&}TRÄGT {\c&HFFFFFF&}EINEN
+Dialogue: 0,0:00:20.53,0:00:21.05,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}JEDE {\c&HFFFFFF&}TRÄNE {\c&H00FFFF&}TRÄGT {\c&HFFFFFF&}EINEN
+Dialogue: 0,0:00:21.05,0:00:21.44,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}JEDE {\c&HFFFFFF&}TRÄNE {\c&HFFFFFF&}TRÄGT {\c&H00FFFF&}EINEN
+Dialogue: 0,0:00:21.44,0:00:21.89,Default,,0,0,0,,{\an5}{\c&H00FFFF&}SAMEN {\c&HFFFFFF&}DER {\c&HFFFFFF&}KRAFT {\c&HFFFFFF&}IN
+Dialogue: 0,0:00:21.89,0:00:22.15,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SAMEN {\c&H00FFFF&}DER {\c&HFFFFFF&}KRAFT {\c&HFFFFFF&}IN
+Dialogue: 0,0:00:22.15,0:00:22.51,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SAMEN {\c&HFFFFFF&}DER {\c&H00FFFF&}KRAFT {\c&HFFFFFF&}IN
+Dialogue: 0,0:00:22.51,0:00:22.87,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SAMEN {\c&HFFFFFF&}DER {\c&HFFFFFF&}KRAFT {\c&H00FFFF&}IN
+Dialogue: 0,0:00:22.87,0:00:23.12,Default,,0,0,0,,{\an5}{\c&H00FFFF&}SICH {\c&HFFFFFF&}LASS {\c&HFFFFFF&}DIE {\c&HFFFFFF&}DUNKELHEIT
+Dialogue: 0,0:00:24.42,0:00:24.42,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SICH {\c&H00FFFF&}LASS {\c&HFFFFFF&}DIE {\c&HFFFFFF&}DUNKELHEIT
+Dialogue: 0,0:00:24.42,0:00:24.67,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SICH {\c&HFFFFFF&}LASS {\c&H00FFFF&}DIE {\c&HFFFFFF&}DUNKELHEIT
+Dialogue: 0,0:00:24.67,0:00:25.37,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}SICH {\c&HFFFFFF&}LASS {\c&HFFFFFF&}DIE {\c&H00FFFF&}DUNKELHEIT
+Dialogue: 0,0:00:25.37,0:00:25.95,Default,,0,0,0,,{\an5}{\c&H00FFFF&}NICHT {\c&HFFFFFF&}DEIN {\c&HFFFFFF&}ENDE {\c&HFFFFFF&}SEIN
+Dialogue: 0,0:00:25.95,0:00:26.35,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}NICHT {\c&H00FFFF&}DEIN {\c&HFFFFFF&}ENDE {\c&HFFFFFF&}SEIN
+Dialogue: 0,0:00:26.35,0:00:26.73,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}NICHT {\c&HFFFFFF&}DEIN {\c&H00FFFF&}ENDE {\c&HFFFFFF&}SEIN
+Dialogue: 0,0:00:26.73,0:00:27.07,Default,,0,0,0,,{\an5}{\c&HFFFFFF&}NICHT {\c&HFFFFFF&}DEIN {\c&HFFFFFF&}ENDE {\c&H00FFFF&}SEIN
