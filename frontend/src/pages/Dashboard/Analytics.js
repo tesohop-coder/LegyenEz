@@ -312,20 +312,26 @@ export default function Analytics() {
   return (
     <>
       <style>{styles}</style>
-      <div className="space-y-8" data-testid="analytics-page">
+      <div className="analytics-page-bg space-y-8" data-testid="analytics-page">
+        {/* Animated background blobs */}
+        <div className="bg-blob bg-blob-1" />
+        <div className="bg-blob bg-blob-2" />
+        <div className="bg-blob bg-blob-3" />
+        
         {/* Header with animated accent */}
-        <div className="relative">
-          <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-400/10 rounded-full blur-3xl" />
-          <div className="relative">
-            <div className="flex items-center gap-3 mb-2">
-              <Activity className="text-amber-400" size={32} />
-              <h1 className="text-3xl md:text-4xl font-bold text-white">
-                {t('analytics')}
-              </h1>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 bg-gradient-to-br from-amber-400/20 to-orange-500/10 rounded-xl">
+              <Activity className="text-amber-400" size={28} />
             </div>
-            <p className="text-zinc-400 text-sm md:text-base pl-11">
-              {t('analytics_subtitle')}
-            </p>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-white">
+                Analytics Dashboard
+              </h1>
+              <p className="text-zinc-400 text-sm">
+                Performance metrikák és insights
+              </p>
+            </div>
           </div>
         </div>
 
