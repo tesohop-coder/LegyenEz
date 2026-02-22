@@ -297,14 +297,6 @@ export default function VideoFactory() {
     );
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-amber-400 text-lg">Betöltés...</div>
-      </div>
-    );
-  }
-
   const selectedScriptData = scripts.find(s => s.id === selectedScript);
 
   return (
