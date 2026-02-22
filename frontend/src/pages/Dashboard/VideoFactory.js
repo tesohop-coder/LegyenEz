@@ -349,7 +349,7 @@ export default function VideoFactory() {
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-white">{selectedScriptData.topic}</h4>
                     <Badge className="bg-amber-400/10 text-amber-400">
-                      {selectedScriptData.character_count} karakter
+                      {selectedScriptData.character_count} {t('characters')}
                     </Badge>
                   </div>
                   <p className="text-sm text-zinc-400 font-mono leading-relaxed whitespace-pre-wrap">
