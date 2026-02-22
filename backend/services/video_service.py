@@ -394,21 +394,47 @@ class VideoGenerationService:
             
             videos = data.get("videos", [])
             
-            # QUALITY FILTER: Sort by quality indicators
+            # ADVANCED QUALITY FILTER: Cinematic content selection
             quality_videos = []
             for video in videos:
                 # Filter criteria:
-                # 1. Has HD files
+                # 1. Has HD files (Full HD preferred)
                 # 2. Duration > 5 seconds
                 # 3. Has proper metadata
+                # 4. Check for cinematic quality indicators
                 duration = video.get("duration", 0)
                 video_files = video.get("video_files", [])
+                width = video.get("width", 0)
+                height = video.get("height", 0)
                 
-                if duration >= 5 and len(video_files) > 0:
+                # Quality scoring system
+                quality_score = 0
+                
+                # Duration score (5-15s is ideal for B-roll)
+                if 5 <= duration <= 15:
+                    quality_score += 2
+                elif duration > 15:
+                    quality_score += 1
+                
+                # Resolution score (prefer 1080p+)
+                if width >= 1080 or height >= 1920:
+                    quality_score += 3
+                elif width >= 720 or height >= 1280:
+                    quality_score += 1
+                
+                # Has multiple file options (usually curated content)
+                if len(video_files) >= 3:
+                    quality_score += 1
+                
+                # Only accept videos with minimum quality
+                if duration >= 5 and len(video_files) > 0 and quality_score >= 3:
+                    video['quality_score'] = quality_score
                     quality_videos.append(video)
             
-            # Sort by duration (longer = often better quality)
-            quality_videos.sort(key=lambda v: v.get("duration", 0), reverse=True)
+            # Sort by quality score (highest first) for consistent cinematic look
+            quality_videos.sort(key=lambda v: v.get('quality_score', 0), reverse=True)
+            
+            logger.info(f"🎯 Filtered {len(quality_videos)} CINEMATIC quality videos from {len(videos)} results")
             
             # Download clips
             downloaded_clips = []
