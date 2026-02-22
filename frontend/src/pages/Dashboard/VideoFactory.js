@@ -401,7 +401,7 @@ export default function VideoFactory() {
               <CardTitle className="text-white flex items-center justify-between">
                 <div className="flex items-center">
                   <Mic className="mr-2 text-blue-400" size={20} />
-                  Hang Beállítások (ElevenLabs)
+                  {t('voice_settings')}
                 </div>
                 <Button
                   onClick={saveVoicePreferences}
@@ -410,7 +410,7 @@ export default function VideoFactory() {
                   className="text-blue-400 hover:text-blue-300"
                 >
                   <Save size={16} className="mr-1" />
-                  Beállítások Mentése
+                  {t('save_settings')}
                 </Button>
               </CardTitle>
             </CardHeader>
