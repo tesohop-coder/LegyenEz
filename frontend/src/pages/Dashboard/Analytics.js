@@ -470,7 +470,7 @@ export default function Analytics() {
 
         {/* Time Series - Modern list */}
         {timeSeries.length > 0 && (
-          <div className="glassmorphism rounded-2xl overflow-hidden" data-testid="time-series-section">
+          <div className="relative z-10 glassmorphism rounded-2xl overflow-hidden" data-testid="time-series-section">
             <div className="p-4 md:p-6 border-b border-white/5">
               <h3 className="text-white font-semibold text-lg flex items-center gap-2">
                 <Activity className="text-blue-400" size={20} />
