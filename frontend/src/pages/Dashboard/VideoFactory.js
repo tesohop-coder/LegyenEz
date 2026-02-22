@@ -196,15 +196,15 @@ export default function VideoFactory() {
       ));
 
       setIsEditingScript(false);
-      toast.success('Script sikeresen frissítve!');
+      toast.success(t('script_updated'));
     } catch (error) {
-      toast.error('Hiba a mentés során: ' + (error.response?.data?.detail || error.message));
+      toast.error(t('save_error') + ': ' + (error.response?.data?.detail || error.message));
     }
   };
 
   const handleGenerateVideo = async () => {
     if (!selectedScript) {
-      toast.error('Válassz ki egy scriptet!');
+      toast.error(t('select_script_error'));
       return;
     }
 
@@ -212,7 +212,7 @@ export default function VideoFactory() {
     const finalVoiceId = voiceOption === 'custom' ? customVoiceId : voiceId;
 
     if (!finalVoiceId) {
-      toast.error('Válassz voice-t vagy adj meg custom Voice ID-t!');
+      toast.error(t('select_voice_error'));
       return;
     }
 
