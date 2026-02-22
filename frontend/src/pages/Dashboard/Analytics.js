@@ -141,7 +141,7 @@ export default function Analytics() {
     <div className="space-y-6 bg-gradient-to-b from-amber-500/5 via-purple-500/5 to-blue-500/5 -m-6 p-6 lg:-m-8 lg:p-8 min-h-screen" data-testid="analytics-page">
       
       {/* Header */}
-      <div className="flex items-center justify-between gap-3 mb-6">
+      <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-gradient-to-br from-amber-500/30 to-orange-500/20 rounded-xl border border-amber-500/30">
             <Activity className="text-amber-400" size={28} />
