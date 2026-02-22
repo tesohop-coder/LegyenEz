@@ -464,16 +464,16 @@ export default function VideoFactory() {
               {/* Custom Voice ID Input */}
               {voiceOption === 'custom' && (
                 <div>
-                  <Label className="text-zinc-300">Saját Voice ID (ElevenLabs)</Label>
+                  <Label className="text-zinc-300">{t('enter_voice_id')}</Label>
                   <Input
                     type="text"
                     value={customVoiceId}
                     onChange={(e) => setCustomVoiceId(e.target.value)}
-                    placeholder="Pl: BsX9EcVskRzn0UFZ9dmh"
+                    placeholder={t('voice_id_placeholder')}
                     className="bg-zinc-800 border-zinc-700 text-white mt-1"
                   />
                   <p className="text-xs text-zinc-500 mt-1">
-                    Találd meg a Voice ID-t az ElevenLabs dashboard-on
+                    {t('voice_id_hint')}
                   </p>
                 </div>
               )}
@@ -482,7 +482,7 @@ export default function VideoFactory() {
               <div className="space-y-4 pt-2">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <Label className="text-zinc-300">Stability</Label>
+                    <Label className="text-zinc-300">{t('stability')}</Label>
                     <span className="text-zinc-400 text-sm">{voiceSettings.stability.toFixed(2)}</span>
                   </div>
                   <Slider
