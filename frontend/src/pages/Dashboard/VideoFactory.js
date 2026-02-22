@@ -159,10 +159,10 @@ export default function VideoFactory() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      toast.success('Letöltés sikeres!');
+      toast.success(t('download_success'));
     } catch (error) {
       console.error('Download failed:', error);
-      toast.error('Letöltés sikertelen: ' + (error.response?.data?.detail || error.message));
+      toast.error(t('download_error') + ': ' + (error.response?.data?.detail || error.message));
     }
   };
 
