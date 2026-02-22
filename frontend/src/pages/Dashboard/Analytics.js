@@ -189,36 +189,35 @@ export default function Analytics() {
   }
 
   // Main hero stat with large display
-  const HeroStat = ({ label, value, icon: Icon, subtitle, accentColor = 'amber' }) => (
-    <div className="stat-card-hero rounded-2xl p-6 hover-lift" data-testid="hero-stat-card">
+  const HeroStat = ({ label, value, icon: Icon, subtitle }) => (
+    <div className="hero-card rounded-2xl p-6 hover-lift" data-testid="hero-stat-card">
       <div className="flex items-start justify-between mb-4">
-        <div className="p-3 rounded-xl bg-blue-500/30 backdrop-blur-sm">
-          <Icon className="text-blue-300" size={28} />
+        <div className="p-3 rounded-xl bg-blue-500/25 border border-blue-400/20">
+          <Icon className="text-blue-400" size={28} />
         </div>
-        <Sparkles className="text-cyan-400/70" size={20} />
+        <Sparkles className="text-cyan-400/60" size={20} />
       </div>
-      <p className="text-blue-200/80 text-sm font-medium mb-1">{label}</p>
-      <h2 className="text-4xl md:text-5xl font-bold number-highlight mb-2">
+      <p className="text-blue-200/70 text-sm font-medium mb-1">{label}</p>
+      <h2 className="text-4xl md:text-5xl font-bold number-glow mb-2">
         {typeof value === 'number' ? value.toLocaleString() : value}
       </h2>
-      {subtitle && <p className="text-xs text-blue-300/60">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-blue-300/50">{subtitle}</p>}
     </div>
   );
 
-  // Compact stat card with icon
+  // Compact stat card with colored accent
   const CompactStat = ({ label, value, icon: Icon, color, index }) => (
     <div 
-      className={`compact-stat-card ${color} rounded-xl p-4 hover-lift cursor-default`}
-      style={{ animationDelay: `${index * 100}ms` }}
+      className={`stat-card stat-card-${color} rounded-xl p-4 hover-lift cursor-default`}
       data-testid={`compact-stat-${label.toLowerCase().replace(/\s/g, '-')}`}
     >
       <div className="flex items-center space-x-3">
-        <div className={`p-2.5 rounded-lg bg-${color}-400/20`}>
+        <div className={`p-2.5 rounded-lg bg-${color}-400/15 border border-${color}-400/20`}>
           <Icon className={`text-${color}-400`} size={20} />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-zinc-400 text-xs font-medium truncate">{label}</p>
-          <p className="text-white text-xl font-bold">
+          <p className={`text-${color}-100 text-xl font-bold`}>
             {typeof value === 'number' ? value.toLocaleString() : value}
           </p>
         </div>
