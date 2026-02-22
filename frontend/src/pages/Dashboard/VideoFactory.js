@@ -362,15 +362,15 @@ export default function VideoFactory() {
               {isEditingScript && (
                 <div className="space-y-3">
                   <div>
-                    <Label className="text-zinc-300 mb-2">Script szövege</Label>
+                    <Label className="text-zinc-300 mb-2">{t('script_text')}</Label>
                     <Textarea
                       value={editedScriptText}
                       onChange={(e) => setEditedScriptText(e.target.value)}
                       className="bg-zinc-800 border-zinc-700 text-white min-h-[200px] font-mono"
-                      placeholder="Írd be a script szövegét..."
+                      placeholder={t('script_text_placeholder')}
                     />
                     <p className="text-sm text-zinc-500 mt-1">
-                      Karakterek: {editedScriptText.length}
+                      {t('characters')}: {editedScriptText.length}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -379,7 +379,7 @@ export default function VideoFactory() {
                       className="bg-green-600 hover:bg-green-700"
                     >
                       <Save size={16} className="mr-1" />
-                      Mentés
+                      {t('save')}
                     </Button>
                     <Button
                       onClick={cancelEditingScript}
@@ -387,7 +387,7 @@ export default function VideoFactory() {
                       className="border-zinc-700"
                     >
                       <X size={16} className="mr-1" />
-                      Mégse
+                      {t('cancel')}
                     </Button>
                   </div>
                 </div>
