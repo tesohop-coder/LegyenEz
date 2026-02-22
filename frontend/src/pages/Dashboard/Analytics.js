@@ -221,12 +221,12 @@ export default function Analytics() {
   // Compact stat card with icon
   const CompactStat = ({ label, value, icon: Icon, color, index }) => (
     <div 
-      className="glassmorphism rounded-xl p-4 hover-lift cursor-default"
+      className={`compact-stat-card ${color} rounded-xl p-4 hover-lift cursor-default`}
       style={{ animationDelay: `${index * 100}ms` }}
       data-testid={`compact-stat-${label.toLowerCase().replace(/\s/g, '-')}`}
     >
       <div className="flex items-center space-x-3">
-        <div className={`p-2.5 rounded-lg bg-gradient-to-br from-${color}-400/20 to-${color}-600/10`}>
+        <div className={`p-2.5 rounded-lg bg-${color}-400/20`}>
           <Icon className={`text-${color}-400`} size={20} />
         </div>
         <div className="flex-1 min-w-0">
