@@ -5,6 +5,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import de from './locales/de.json';
 import hu from './locales/hu.json';
 import en from './locales/en.json';
+import pl from './locales/pl.json';
+import nl from './locales/nl.json';
 
 i18n
   .use(LanguageDetector)
@@ -13,7 +15,9 @@ i18n
     resources: {
       de: { translation: de },
       hu: { translation: hu },
-      en: { translation: en }
+      en: { translation: en },
+      pl: { translation: pl },
+      nl: { translation: nl }
     },
     fallbackLng: 'de', // Default: German
     detection: {
@@ -22,6 +26,9 @@ i18n
     },
     interpolation: {
       escapeValue: false
+    },
+    react: {
+      useSuspense: false // Disable suspense for instant language switching
     }
   });
 
