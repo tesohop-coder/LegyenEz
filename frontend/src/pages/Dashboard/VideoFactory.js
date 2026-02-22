@@ -322,7 +322,7 @@ export default function VideoFactory() {
                     className="text-amber-400 hover:text-amber-300"
                   >
                     <Edit size={16} className="mr-1" />
-                    Szerkesztés
+                    {t('edit')}
                   </Button>
                 )}
               </CardTitle>
