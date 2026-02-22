@@ -212,39 +212,57 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                     'end': (i + 1) * word_duration
                 })
         
-        # Group words (4-5 per line) - VISSZAÁLLÍTVA az előző verzióra
+        # IMPROVED: Beszédszünet-alapú csoportosítás (gap-based grouping)
+        # Automatikusan érzékeli a természetes szüneteket (lélegzetvétel, gondolkodás)
+        # és aszerint csoportosítja a szavakat
+        
         groups = []
         current_group = []
-        for wt in word_timings:
-            current_group.append(wt)
-            if len(current_group) >= 4:
+        GAP_THRESHOLD = 0.35  # 350ms szünet = új csoport (természetes lélegzetvétel)
+        
+        for i, word in enumerate(word_timings):
+            current_group.append(word)
+            
+            # Ellenőrizzük, van-e következő szó
+            if i < len(word_timings) - 1:
+                next_word = word_timings[i + 1]
+                gap = next_word['start'] - word['end']
+                
+                # Ha nagy szünet van (lélegzetvétel), új csoport kezdődik
+                if gap > GAP_THRESHOLD:
+                    groups.append(current_group)
+                    current_group = []
+                    logger.debug(f"Gap detected: {gap:.2f}s after '{word['word']}' - new group")
+            else:
+                # Utolsó szó
                 groups.append(current_group)
-                current_group = []
+        
+        # Ha maradt valami
         if current_group:
             groups.append(current_group)
         
-        # Generate dialogue - each word gets its own line showing the WHOLE group
-        # with ONLY that word highlighted
-        for group in groups:
+        logger.info(f"Created {len(groups)} natural speech groups (gap-based, threshold={GAP_THRESHOLD}s)")
+        
+        # Generate dialogue - CSAK a csoport időtartamában látszik!
+        # Minden csoport: első szó start → utolsó szó end
+        for group_idx, group in enumerate(groups):
+            # Minden szóhoz a TELJES csoport látszik, de csak az adott szó idejében
             for idx, current_word in enumerate(group):
                 word_start = current_word['start']
                 word_end = current_word['end']
                 
                 # Build text: current word YELLOW, all others WHITE
-                # Using {\c&HBBGGRR&} format
-                # YELLOW = &H00FFFF (BGR)
-                # WHITE = &HFFFFFF (BGR)
                 # All text is UPPERCASE
                 parts = []
                 for i, wt in enumerate(group):
                     if i == idx:
-                        # CURRENT word - YELLOW - UPPERCASE
+                        # CURRENT word - YELLOW
                         parts.append("{\\c&H00FFFF&}" + wt['word'].upper())
                     else:
-                        # Other words - WHITE - UPPERCASE
+                        # Other words in group - WHITE
                         parts.append("{\\c&HFFFFFF&}" + wt['word'].upper())
                 
-                # Add \an5 tag to FORCE middle-center alignment
+                # Add \an5 tag for center alignment
                 line_text = "{\\an5}" + " ".join(parts)
                 start = FFmpegService.format_ass_time(word_start)
                 end = FFmpegService.format_ass_time(word_end)
@@ -254,7 +272,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(ass_content)
         
-        logger.info(f"Created karaoke subtitles: {output_path}")
+        logger.info(f"Created GAP-BASED karaoke subtitles: {output_path}")
     
     @staticmethod
     def format_ass_time(seconds: float) -> str:
