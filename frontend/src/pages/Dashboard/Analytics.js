@@ -158,7 +158,7 @@ export default function Analytics() {
       </div>
 
       {/* YouTube Connection Card */}
-      <div className="bg-gradient-to-br from-red-600/20 via-red-500/10 to-red-600/5 border border-red-500/30 rounded-2xl p-6">
+      <div className="bg-gradient-to-br from-red-600/20 via-red-500/10 to-red-600/5 border border-red-500/30 rounded-2xl p-6 mt-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-red-500/20 rounded-xl border border-red-400/30">
