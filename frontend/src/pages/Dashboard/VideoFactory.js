@@ -417,7 +417,7 @@ export default function VideoFactory() {
             <CardContent className="space-y-4">
               {/* Voice Selection */}
               <div>
-                <Label className="text-zinc-300">Voice Kiválasztás</Label>
+                <Label className="text-zinc-300">{t('voice_selection')}</Label>
                 <div className="grid grid-cols-2 gap-2 mt-2">
                   <button
                     onClick={() => setVoiceOption('default')}
@@ -427,7 +427,7 @@ export default function VideoFactory() {
                         : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
                     }`}
                   >
-                    Népszerű Voice-ok
+                    {t('popular_voices')}
                   </button>
                   <button
                     onClick={() => setVoiceOption('custom')}
@@ -437,7 +437,7 @@ export default function VideoFactory() {
                         : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
                     }`}
                   >
-                    Saját Voice ID
+                    {t('custom_voice_id')}
                   </button>
                 </div>
               </div>
@@ -445,10 +445,10 @@ export default function VideoFactory() {
               {/* Popular Voices Dropdown */}
               {voiceOption === 'default' && (
                 <div>
-                  <Label className="text-zinc-300">Válassz Voice-t</Label>
+                  <Label className="text-zinc-300">{t('select_voice')}</Label>
                   <Select value={voiceId} onValueChange={setVoiceId}>
                     <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white mt-1">
-                      <SelectValue placeholder="Válassz hangot..." />
+                      <SelectValue placeholder={t('select_voice_placeholder')} />
                     </SelectTrigger>
                     <SelectContent className="bg-zinc-800 border-zinc-700">
                       {popularVoices.map(voice => (
