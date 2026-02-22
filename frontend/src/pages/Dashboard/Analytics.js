@@ -149,7 +149,7 @@ export default function Analytics() {
           </div>
 
           {/* Retention & Swipe Rate */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             
             {/* Retention Rate */}
             <div className="bg-gradient-to-br from-green-600/25 via-emerald-500/15 to-green-600/5 border border-green-500/40 rounded-2xl p-6">
