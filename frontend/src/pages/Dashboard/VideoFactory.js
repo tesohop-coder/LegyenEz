@@ -218,22 +218,34 @@ export default function VideoFactory() {
     setGenerating(true);
 
     try {
+      // Add timeout to prevent hanging (10 seconds max for API call)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
       await api.post('/videos/generate', {
         script_id: selectedScript,
         voice_id: finalVoiceId,
         voice_settings: voiceSettings,
         background_music: backgroundMusic || null,
         b_roll_search: brollSearch || null
+      }, {
+        signal: controller.signal
       });
 
-      toast.success('Videó generálás elindult! Ez eltarthat néhány percig...');
+      clearTimeout(timeoutId);
+
+      toast.success('🎬 Videó generálás elindult! Háttérben fut, használhatod az oldalt közben. Ellenőrzés 10 másodpercenként...');
       
-      // Refresh videos list
-      setTimeout(() => {
-        fetchVideos();
-      }, 2000);
+      // Immediate refresh to show "queued" status
+      fetchVideos();
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Videó generálás sikertelen');
+      if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+        // Timeout - but video might still be queued
+        toast.warning('⏱️ Az API hívás túllépte az időkorlátot, de a videó generálás valószínűleg elindult. Nézd meg a videók listáját!');
+        fetchVideos();
+      } else {
+        toast.error(error.response?.data?.detail || 'Videó generálás sikertelen');
+      }
     } finally {
       setGenerating(false);
     }
