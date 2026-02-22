@@ -513,7 +513,7 @@ export default function Analytics() {
 
         {/* Empty State */}
         {!overview && (
-          <div className="glassmorphism rounded-2xl p-12 text-center" data-testid="empty-state">
+          <div className="relative z-10 glassmorphism rounded-2xl p-12 text-center" data-testid="empty-state">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-zinc-800/50 mb-6">
               <TrendingUp className="text-zinc-500" size={40} />
             </div>
