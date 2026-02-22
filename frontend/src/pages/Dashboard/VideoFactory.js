@@ -79,8 +79,16 @@ export default function VideoFactory() {
   }, []);
 
   const fetchData = async () => {
+    // Only set loading on FIRST load (not on subsequent navigations)
+    const hasLoadedBefore = sessionStorage.getItem('videoFactory_loaded');
+    
+    if (!hasLoadedBefore) {
+      setLoading(true);
+    }
+    
     try {
       await Promise.all([fetchScripts(), fetchVideos()]);
+      sessionStorage.setItem('videoFactory_loaded', 'true');
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
