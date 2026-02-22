@@ -1059,6 +1059,20 @@ const translations = {
     no_videos_yet: 'Nog geen gegenereerde videos',
     select_and_generate: 'Selecteer een script en start videogeneratie!',
     
+    // Toast messages
+    voice_settings_loaded: 'Opgeslagen steminstellingen geladen!',
+    voice_settings_saved: 'Steminstellingen opgeslagen! Ze worden automatisch geladen bij de volgende keer.',
+    save_error: 'Fout bij opslaan',
+    download_starting: 'Download start...',
+    download_success: 'Download succesvol!',
+    download_error: 'Download mislukt',
+    script_updated: 'Script succesvol bijgewerkt!',
+    select_script_error: 'Selecteer een script!',
+    select_voice_error: 'Selecteer een stem of voer een aangepaste Voice ID in!',
+    video_generation_started: '🎬 Videogeneratie gestart! Loopt op de achtergrond, u kunt de pagina gebruiken.',
+    video_generation_timeout: '⏱️ API-aanroep time-out, maar videogeneratie is waarschijnlijk gestart. Controleer de videolijst!',
+    video_generation_failed: 'Videogeneratie mislukt',
+    
     // Analytics
     analytics: 'Analytics Dashboard',
     analytics_subtitle: 'Prestatiemetrieken en inzichten',
