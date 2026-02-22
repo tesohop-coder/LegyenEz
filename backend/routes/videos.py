@@ -21,12 +21,14 @@ background_video_tasks = {}
 @router.post("/generate")
 async def generate_video(
     request: VideoGenerateRequest,
-    background_tasks: BackgroundTasks,
     current_user = Depends(get_current_user)
 ):
     """
     Generate video from script.
     Process: Script → TTS (ElevenLabs) → B-roll (Pexels) → FFmpeg Assembly → MP4
+    
+    Uses asyncio.create_task() for TRUE background execution.
+    Returns immediately while video generates in background.
     """
     try:
         # Get script
@@ -50,24 +52,36 @@ async def generate_video(
         
         await db.videos.insert_one(video_dict)
         
-        # Queue video generation in background
-        background_tasks.add_task(
-            video_service.generate_video,
-            video_id=video.id,
-            script_text=script["script"],
-            topic=script["topic"],
-            user_id=current_user["id"],
-            voice_settings=request.voice_settings,
-            background_music=request.background_music,
-            b_roll_search=request.b_roll_search
+        # Create TRUE background task using asyncio (non-blocking)
+        task = asyncio.create_task(
+            video_service.generate_video(
+                video_id=video.id,
+                script_text=script["script"],
+                topic=script["topic"],
+                user_id=current_user["id"],
+                voice_settings=request.voice_settings,
+                background_music=request.background_music,
+                b_roll_search=request.b_roll_search
+            )
         )
         
-        logger.info(f"Queued video generation {video.id} for script {request.script_id}")
+        # Store task reference (prevents garbage collection)
+        background_video_tasks[video.id] = task
         
+        # Clean up completed tasks
+        def cleanup_task(video_id):
+            if video_id in background_video_tasks:
+                del background_video_tasks[video_id]
+        
+        task.add_done_callback(lambda t: cleanup_task(video.id))
+        
+        logger.info(f"🚀 Started TRUE background video generation {video.id} for script {request.script_id}")
+        
+        # Return IMMEDIATELY - video generates in background
         return {
             "id": video.id,
             "status": "queued",
-            "message": "Video generation started"
+            "message": "Video generation started in background"
         }
     
     except Exception as e:
