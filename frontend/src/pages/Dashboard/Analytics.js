@@ -233,21 +233,19 @@ export default function Analytics() {
     const isGood = value >= target;
 
     return (
-      <div className={`metric-card ${color} rounded-2xl p-6 hover-lift`} data-testid={`metric-ring-${label.toLowerCase().replace(/\s/g, '-')}`}>
+      <div className={`metric-section-${color} rounded-2xl p-6 hover-lift`} data-testid={`metric-ring-${label.toLowerCase().replace(/\s/g, '-')}`}>
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
           {/* Circular Progress */}
           <div className={`relative flex-shrink-0 ring-glow-${color}`}>
             <svg width="120" height="120" className="transform -rotate-90">
-              {/* Background circle */}
               <circle
                 cx="60"
                 cy="60"
                 r="45"
-                stroke="rgba(63, 63, 70, 0.5)"
+                stroke="rgba(63, 63, 70, 0.4)"
                 strokeWidth="8"
                 fill="none"
               />
-              {/* Progress circle */}
               <circle
                 cx="60"
                 cy="60"
@@ -267,14 +265,12 @@ export default function Analytics() {
                 </linearGradient>
               </defs>
             </svg>
-            {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className={`text-2xl font-bold text-${color}-400`}>{value.toFixed(1)}%</span>
               <Icon className={`text-${color}-400/60 mt-1`} size={16} />
             </div>
           </div>
 
-          {/* Text content */}
           <div className="flex-1 text-center md:text-left">
             <h3 className={`text-${color}-400 font-semibold text-lg mb-1 flex items-center justify-center md:justify-start gap-2`}>
               <Icon size={18} />
@@ -286,7 +282,7 @@ export default function Analytics() {
                 {isGood ? t('excellent') : t('improvable')}
               </Badge>
               <span className="text-xs text-zinc-500">
-                {isGood ? `${target}%+ = ` : `${t('target')}: `}{isGood ? (color === 'green' ? 'jó teljesítmény' : 'erős hook') : `${target}%+`}
+                target: {target}%+
               </span>
             </div>
           </div>
