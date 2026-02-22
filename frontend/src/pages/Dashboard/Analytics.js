@@ -355,15 +355,15 @@ export default function Analytics() {
                 index={2}
               />
               
-              {/* Engagement score - calculated metric */}
-              <div className="compact-stat-card amber rounded-xl p-4 hover-lift" data-testid="engagement-score">
+              {/* Engagement score */}
+              <div className="stat-card stat-card-amber rounded-xl p-4 hover-lift" data-testid="engagement-score">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2.5 rounded-lg bg-amber-400/20">
+                  <div className="p-2.5 rounded-lg bg-amber-400/15 border border-amber-400/20">
                     <Sparkles className="text-amber-400" size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-zinc-400 text-xs font-medium">Engagement</p>
-                    <p className="text-white text-xl font-bold">
+                    <p className="text-amber-100 text-xl font-bold">
                       {((overview.total_likes + overview.total_comments) / Math.max(overview.total_views, 1) * 100).toFixed(1)}%
                     </p>
                   </div>
