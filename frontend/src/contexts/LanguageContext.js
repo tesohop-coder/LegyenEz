@@ -163,6 +163,20 @@ const translations = {
     no_videos_yet: 'Még nincs generált videó',
     select_and_generate: 'Válassz egy scriptet és indítsd el a videó generálást!',
     
+    // Toast messages
+    voice_settings_loaded: 'Betöltöttem a mentett hang beállításokat!',
+    voice_settings_saved: 'Hang beállítások elmentve! Legközelebb automatikusan betöltődnek.',
+    save_error: 'Hiba a mentés során',
+    download_starting: 'Letöltés indul...',
+    download_success: 'Letöltés sikeres!',
+    download_error: 'Letöltés sikertelen',
+    script_updated: 'Script sikeresen frissítve!',
+    select_script_error: 'Válassz ki egy scriptet!',
+    select_voice_error: 'Válassz voice-t vagy adj meg custom Voice ID-t!',
+    video_generation_started: '🎬 Videó generálás elindult! Háttérben fut, használhatod az oldalt közben.',
+    video_generation_timeout: '⏱️ Az API hívás túllépte az időkorlátot, de a videó generálás valószínűleg elindult. Nézd meg a videók listáját!',
+    video_generation_failed: 'Videó generálás sikertelen',
+    
     // Analytics
     analytics: 'Analytics Dashboard',
     analytics_subtitle: 'Performance metrikák és insights',
