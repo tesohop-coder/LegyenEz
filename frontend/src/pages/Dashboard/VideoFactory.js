@@ -116,7 +116,7 @@ export default function VideoFactory() {
         setVoiceId(pref.voice_id);
         setVoiceSettings(pref.voice_settings);
         setVoiceOption('custom'); // Auto-select custom if we have saved preferences
-        toast.success('Betöltöttem a mentett hang beállításokat!');
+        toast.success(t('voice_settings_loaded'));
       }
     } catch (error) {
       console.log('No saved voice preferences found');
@@ -134,15 +134,15 @@ export default function VideoFactory() {
         is_default: true
       });
 
-      toast.success('Hang beállítások elmentve! Legközelebb automatikusan betöltődnek.');
+      toast.success(t('voice_settings_saved'));
     } catch (error) {
-      toast.error('Hiba a mentés során: ' + (error.response?.data?.detail || error.message));
+      toast.error(t('save_error') + ': ' + (error.response?.data?.detail || error.message));
     }
   };
 
   const handleDownload = async (videoId) => {
     try {
-      toast.info('Letöltés indul...');
+      toast.info(t('download_starting'));
       
       const response = await api.get(`/videos/${videoId}/download`, {
         responseType: 'blob'
