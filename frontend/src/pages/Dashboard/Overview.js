@@ -63,41 +63,65 @@ export default function DashboardOverview() {
         </p>
       </div>
 
-      {/* Stats Cards - Responsive Grid: Mobile 2 cols, Tablet 2 cols, Desktop 4 cols */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <Card className="bg-zinc-900/50 border-zinc-800 backdrop-blur">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div className="w-full">
-                <p className="text-xs sm:text-sm text-zinc-500 mb-1">{t('total_scripts')}</p>
-                <p className="text-2xl sm:text-4xl font-bold text-white">{stats.total_scripts}</p>
-              </div>
-              <div className="p-2 sm:p-3 bg-amber-400/10 rounded-xl">
-                <FileText className="text-amber-400" size={20} />
-              </div>
+      {/* Stats Cards - Modern Gradient Design */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Scripts Card - Amber/Gold Gradient */}
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500/20 via-amber-600/10 to-transparent border border-amber-500/20 backdrop-blur-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/20">
+          <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+            <div className="p-3 bg-amber-400/20 rounded-xl backdrop-blur-sm">
+              <FileText className="text-amber-400" size={24} />
             </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-zinc-900/50 border-zinc-800 backdrop-blur">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div className="w-full">
-                <p className="text-xs sm:text-sm text-zinc-500 mb-1">{t('total_hooks')}</p>
-                <p className="text-2xl sm:text-4xl font-bold text-white">{stats.total_hooks}</p>
-              </div>
-              <div className="p-2 sm:p-3 bg-blue-400/10 rounded-xl">
-                <Bookmark className="text-blue-400" size={20} />
-              </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-1">{stats.total_scripts}</p>
+              <p className="text-sm text-amber-200/80">{t('total_scripts')}</p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-amber-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
 
-        <Card className="bg-zinc-900/50 border-zinc-800 backdrop-blur">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-              <div className="w-full">
-                <p className="text-xs sm:text-sm text-zinc-500 mb-1">{t('avg_retention')}</p>
+        {/* Hooks Card - Blue Gradient */}
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/20 via-blue-600/10 to-transparent border border-blue-500/20 backdrop-blur-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+          <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+            <div className="p-3 bg-blue-400/20 rounded-xl backdrop-blur-sm">
+              <Bookmark className="text-blue-400" size={24} />
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-1">{stats.total_hooks}</p>
+              <p className="text-sm text-blue-200/80">{t('total_hooks')}</p>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/0 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+
+        {/* Retention Card - Green Gradient */}
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-500/20 via-green-600/10 to-transparent border border-green-500/20 backdrop-blur-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20">
+          <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+            <div className="p-3 bg-green-400/20 rounded-xl backdrop-blur-sm">
+              <TrendingUp className="text-green-400" size={24} />
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-1">{stats.avg_retention.toFixed(1)}%</p>
+              <p className="text-sm text-green-200/80">{t('avg_retention')}</p>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-green-400/0 to-green-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+
+        {/* Swipe Rate Card - Purple Gradient */}
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500/20 via-purple-600/10 to-transparent border border-purple-500/20 backdrop-blur-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
+          <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+            <div className="p-3 bg-purple-400/20 rounded-xl backdrop-blur-sm">
+              <Zap className="text-purple-400" size={24} />
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-white mb-1">{stats.avg_swipe_rate.toFixed(1)}%</p>
+              <p className="text-sm text-purple-200/80">{t('swipe_rate')}</p>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/0 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+      </div>
                 <p className="text-2xl sm:text-4xl font-bold text-white">{stats.avg_retention.toFixed(1)}%</p>
               </div>
               <div className="p-2 sm:p-3 bg-green-400/10 rounded-xl">
