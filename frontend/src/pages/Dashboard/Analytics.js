@@ -141,19 +141,168 @@ export default function Analytics() {
     <div className="space-y-6 bg-gradient-to-b from-amber-500/5 via-purple-500/5 to-blue-500/5 -m-6 p-6 lg:-m-8 lg:p-8 min-h-screen" data-testid="analytics-page">
       
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-gradient-to-br from-amber-500/30 to-orange-500/20 rounded-xl border border-amber-500/30">
-          <Activity className="text-amber-400" size={28} />
-        </div>
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-white">
-            Analytics Dashboard
-          </h1>
-          <p className="text-zinc-400 text-sm">
-            Performance metrikák és insights
-          </p>
+      <div className="flex items-center justify-between gap-3 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-gradient-to-br from-amber-500/30 to-orange-500/20 rounded-xl border border-amber-500/30">
+            <Activity className="text-amber-400" size={28} />
+          </div>
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              Analytics Dashboard
+            </h1>
+            <p className="text-zinc-400 text-sm">
+              Performance metrikák és insights
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* YouTube Connection Card */}
+      <div className="bg-gradient-to-br from-red-600/20 via-red-500/10 to-red-600/5 border border-red-500/30 rounded-2xl p-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-red-500/20 rounded-xl border border-red-400/30">
+              <Youtube className="text-red-400" size={28} />
+            </div>
+            <div>
+              <h3 className="text-white font-semibold text-lg">YouTube Integráció</h3>
+              {youtubeConnected && youtubeChannel ? (
+                <div className="flex items-center gap-2 mt-1">
+                  <img 
+                    src={youtubeChannel.channel_thumbnail} 
+                    alt={youtubeChannel.channel_title}
+                    className="w-6 h-6 rounded-full"
+                  />
+                  <span className="text-red-200 text-sm">{youtubeChannel.channel_title}</span>
+                  <Badge className="bg-green-500/20 text-green-400 border border-green-500/30 text-xs">
+                    Kapcsolódva
+                  </Badge>
+                </div>
+              ) : (
+                <p className="text-zinc-400 text-sm">Kösd össze a csatornádat az automatikus analitikához</p>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            {youtubeConnected ? (
+              <>
+                <Button
+                  onClick={syncYoutubeData}
+                  disabled={syncing}
+                  className="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30"
+                >
+                  <RefreshCw className={`mr-2 ${syncing ? 'animate-spin' : ''}`} size={16} />
+                  {syncing ? 'Szinkronizálás...' : 'Szinkronizálás'}
+                </Button>
+                <Button
+                  onClick={() => setShowYoutubeVideos(!showYoutubeVideos)}
+                  className="bg-zinc-800 hover:bg-zinc-700 text-white"
+                >
+                  <Play className="mr-2" size={16} />
+                  Videók ({youtubeVideos.length})
+                </Button>
+                <Button
+                  onClick={disconnectYoutube}
+                  variant="ghost"
+                  className="text-zinc-400 hover:text-red-400"
+                >
+                  <Unlink size={16} />
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={connectYoutube}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                <Link className="mr-2" size={16} />
+                Csatorna összekapcsolása
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {/* Channel Stats */}
+        {youtubeConnected && youtubeChannel && (
+          <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-red-500/20">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white">{youtubeChannel.subscriber_count?.toLocaleString()}</p>
+              <p className="text-xs text-zinc-400">Feliratkozó</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white">{youtubeChannel.video_count?.toLocaleString()}</p>
+              <p className="text-xs text-zinc-400">Videó</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white">{youtubeChannel.view_count?.toLocaleString()}</p>
+              <p className="text-xs text-zinc-400">Össz. megtekintés</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* YouTube Videos List */}
+      {showYoutubeVideos && youtubeVideos.length > 0 && (
+        <div className="bg-zinc-900/60 backdrop-blur border border-zinc-800 rounded-2xl overflow-hidden">
+          <div className="p-5 border-b border-zinc-800 flex items-center justify-between">
+            <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+              <Youtube className="text-red-400" size={20} />
+              YouTube Shorts ({youtubeVideos.length})
+            </h3>
+            <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/30">
+              Shorts Only
+            </Badge>
+          </div>
+          <div className="divide-y divide-zinc-800 max-h-[500px] overflow-y-auto">
+            {youtubeVideos.map((video, idx) => (
+              <div key={video.video_id || idx} className="p-4 hover:bg-zinc-800/30 transition-colors">
+                <div className="flex gap-4">
+                  {/* Thumbnail */}
+                  <div className="flex-shrink-0">
+                    <img 
+                      src={video.thumbnail} 
+                      alt={video.title}
+                      className="w-24 h-14 object-cover rounded-lg"
+                    />
+                  </div>
+                  
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white font-medium text-sm truncate">{video.title}</h4>
+                    <div className="flex items-center gap-4 mt-2 text-xs">
+                      <div className="flex items-center gap-1 text-blue-400">
+                        <Eye size={12} />
+                        <span>{video.view_count?.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-red-400">
+                        <Heart size={12} />
+                        <span>{video.like_count?.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-400">
+                        <MessageCircle size={12} />
+                        <span>{video.comment_count?.toLocaleString()}</span>
+                      </div>
+                      {video.retention_percentage > 0 && (
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
+                          {video.retention_percentage.toFixed(1)}% retention
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Subscribers gained */}
+                  {video.subscribers_gained > 0 && (
+                    <div className="flex items-center gap-1 text-purple-400 text-xs">
+                      <Users size={12} />
+                      <span>+{video.subscribers_gained}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {overview && (
         <>
