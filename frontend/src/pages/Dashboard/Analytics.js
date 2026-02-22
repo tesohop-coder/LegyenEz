@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import {
   TrendingUp,
@@ -15,129 +14,6 @@ import {
   Sparkles,
   Activity
 } from 'lucide-react';
-
-// CSS for animations
-const styles = `
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-  }
-  
-  .analytics-wrapper {
-    position: relative;
-    background: linear-gradient(180deg, 
-      rgba(251, 191, 36, 0.08) 0%, 
-      rgba(24, 24, 27, 0) 25%,
-      rgba(168, 85, 247, 0.05) 50%,
-      rgba(24, 24, 27, 0) 75%,
-      rgba(59, 130, 246, 0.06) 100%
-    );
-    border-radius: 24px;
-    padding: 4px;
-    margin: -4px;
-  }
-  
-  .hero-card {
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.25) 0%, 
-      rgba(6, 182, 212, 0.15) 50%, 
-      rgba(59, 130, 246, 0.1) 100%
-    );
-    border: 1px solid rgba(59, 130, 246, 0.35);
-    box-shadow: 
-      0 8px 32px rgba(59, 130, 246, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-  }
-  
-  .hero-card:hover {
-    box-shadow: 0 12px 48px rgba(59, 130, 246, 0.3);
-    border-color: rgba(59, 130, 246, 0.5);
-    transform: translateY(-2px);
-  }
-  
-  .stat-card {
-    background: linear-gradient(145deg, rgba(39, 39, 42, 0.95) 0%, rgba(24, 24, 27, 1) 100%);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.3s ease;
-  }
-  
-  .stat-card:hover {
-    border-color: rgba(255, 255, 255, 0.12);
-    transform: translateY(-2px);
-  }
-  
-  .stat-card-red { 
-    border-left: 3px solid #f87171; 
-    background: linear-gradient(145deg, rgba(248, 113, 113, 0.12) 0%, rgba(24, 24, 27, 1) 100%);
-  }
-  .stat-card-green { 
-    border-left: 3px solid #4ade80; 
-    background: linear-gradient(145deg, rgba(74, 222, 128, 0.12) 0%, rgba(24, 24, 27, 1) 100%);
-  }
-  .stat-card-purple { 
-    border-left: 3px solid #a78bfa; 
-    background: linear-gradient(145deg, rgba(167, 139, 250, 0.12) 0%, rgba(24, 24, 27, 1) 100%);
-  }
-  .stat-card-amber { 
-    border-left: 3px solid #fbbf24; 
-    background: linear-gradient(145deg, rgba(251, 191, 36, 0.12) 0%, rgba(24, 24, 27, 1) 100%);
-  }
-  
-  .metric-section-green {
-    background: linear-gradient(145deg, rgba(34, 197, 94, 0.15) 0%, rgba(24, 24, 27, 0.98) 100%);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    box-shadow: 0 4px 24px rgba(34, 197, 94, 0.12);
-  }
-  
-  .metric-section-purple {
-    background: linear-gradient(145deg, rgba(168, 85, 247, 0.15) 0%, rgba(24, 24, 27, 0.98) 100%);
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    box-shadow: 0 4px 24px rgba(168, 85, 247, 0.12);
-  }
-  
-  .glass-panel {
-    background: linear-gradient(145deg, rgba(39, 39, 42, 0.8) 0%, rgba(24, 24, 27, 0.9) 100%);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  
-  .hover-lift {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-4px);
-  }
-  
-  .number-glow {
-    background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #60a5fa 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s linear infinite;
-  }
-  
-  .ring-glow-green {
-    filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.4));
-  }
-  
-  .ring-glow-purple {
-    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.4));
-  }
-  
-  .header-badge {
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(249, 115, 22, 0.1) 100%);
-    border: 1px solid rgba(251, 191, 36, 0.25);
-  }
-`;
 
 export default function Analytics() {
   const { api } = useAuth();
@@ -180,321 +56,305 @@ export default function Analytics() {
     );
   }
 
-  // Main hero stat with large display
-  const HeroStat = ({ label, value, icon: Icon, subtitle }) => (
-    <div className="hero-card rounded-2xl p-6 hover-lift" data-testid="hero-stat-card">
-      <div className="flex items-start justify-between mb-4">
-        <div className="p-3 rounded-xl bg-blue-500/25 border border-blue-400/20">
-          <Icon className="text-blue-400" size={28} />
+  return (
+    <div className="space-y-6 bg-gradient-to-b from-amber-500/5 via-purple-500/5 to-blue-500/5 -m-6 p-6 lg:-m-8 lg:p-8 min-h-screen" data-testid="analytics-page">
+      
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="p-3 bg-gradient-to-br from-amber-500/30 to-orange-500/20 rounded-xl border border-amber-500/30">
+          <Activity className="text-amber-400" size={28} />
         </div>
-        <Sparkles className="text-cyan-400/60" size={20} />
-      </div>
-      <p className="text-blue-200/70 text-sm font-medium mb-1">{label}</p>
-      <h2 className="text-4xl md:text-5xl font-bold number-glow mb-2">
-        {typeof value === 'number' ? value.toLocaleString() : value}
-      </h2>
-      {subtitle && <p className="text-xs text-blue-300/50">{subtitle}</p>}
-    </div>
-  );
-
-  // Compact stat card with colored accent
-  const CompactStat = ({ label, value, icon: Icon, color, index }) => (
-    <div 
-      className={`stat-card stat-card-${color} rounded-xl p-4 hover-lift cursor-default`}
-      data-testid={`compact-stat-${label.toLowerCase().replace(/\s/g, '-')}`}
-    >
-      <div className="flex items-center space-x-3">
-        <div className={`p-2.5 rounded-lg bg-${color}-400/15 border border-${color}-400/20`}>
-          <Icon className={`text-${color}-400`} size={20} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-zinc-400 text-xs font-medium truncate">{label}</p>
-          <p className={`text-${color}-100 text-xl font-bold`}>
-            {typeof value === 'number' ? value.toLocaleString() : value}
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">
+            Analytics Dashboard
+          </h1>
+          <p className="text-zinc-400 text-sm">
+            Performance metrikák és insights
           </p>
         </div>
       </div>
-    </div>
-  );
 
-  // Circular progress ring for percentages
-  const MetricRing = ({ value, label, description, color, target, Icon }) => {
-    const percentage = Math.min(value, 100);
-    const circumference = 2 * Math.PI * 45;
-    const strokeDashoffset = circumference - (percentage / 100) * circumference;
-    const isGood = value >= target;
+      {overview && (
+        <>
+          {/* Main Stats Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+            
+            {/* Hero Card - Views */}
+            <div className="col-span-2 lg:col-span-1 bg-gradient-to-br from-blue-600/30 via-cyan-500/20 to-blue-600/10 border border-blue-500/40 rounded-2xl p-6 hover:border-blue-400/60 transition-all duration-300 hover:-translate-y-1">
+              <div className="flex items-start justify-between mb-4">
+                <div className="p-3 bg-blue-500/30 rounded-xl border border-blue-400/30">
+                  <Eye className="text-blue-400" size={24} />
+                </div>
+                <Sparkles className="text-cyan-400/70" size={18} />
+              </div>
+              <p className="text-blue-300/80 text-sm font-medium mb-1">{t('total_views')}</p>
+              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                {(overview.total_views || 0).toLocaleString()}
+              </h2>
+            </div>
 
-    return (
-      <div className={`metric-section-${color} rounded-2xl p-6 hover-lift`} data-testid={`metric-ring-${label.toLowerCase().replace(/\s/g, '-')}`}>
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-          {/* Circular Progress */}
-          <div className={`relative flex-shrink-0 ring-glow-${color}`}>
-            <svg width="120" height="120" className="transform -rotate-90">
-              <circle
-                cx="60"
-                cy="60"
-                r="45"
-                stroke="rgba(63, 63, 70, 0.4)"
-                strokeWidth="8"
-                fill="none"
-              />
-              <circle
-                cx="60"
-                cy="60"
-                r="45"
-                stroke={`url(#gradient-${color})`}
-                strokeWidth="10"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-1000 ease-out"
-              />
-              <defs>
-                <linearGradient id={`gradient-${color}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={color === 'green' ? '#4ade80' : '#c4b5fd'} />
-                  <stop offset="100%" stopColor={color === 'green' ? '#22c55e' : '#8b5cf6'} />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className={`text-2xl font-bold text-${color}-400`}>{value.toFixed(1)}%</span>
-              <Icon className={`text-${color}-400/60 mt-1`} size={16} />
+            {/* Likes Card */}
+            <div className="bg-gradient-to-br from-red-500/20 to-pink-500/10 border-l-4 border-l-red-400 border border-red-500/20 rounded-xl p-4 hover:border-red-400/40 transition-all duration-300">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-red-500/20 rounded-lg border border-red-400/30">
+                  <Heart className="text-red-400" size={20} />
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-xs font-medium">{t('total_likes')}</p>
+                  <p className="text-red-100 text-xl font-bold">{(overview.total_likes || 0).toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Comments Card */}
+            <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/10 border-l-4 border-l-green-400 border border-green-500/20 rounded-xl p-4 hover:border-green-400/40 transition-all duration-300">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-green-500/20 rounded-lg border border-green-400/30">
+                  <MessageCircle className="text-green-400" size={20} />
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-xs font-medium">{t('total_comments')}</p>
+                  <p className="text-green-100 text-xl font-bold">{(overview.total_comments || 0).toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Subscribers Card */}
+            <div className="bg-gradient-to-br from-purple-500/20 to-violet-500/10 border-l-4 border-l-purple-400 border border-purple-500/20 rounded-xl p-4 hover:border-purple-400/40 transition-all duration-300">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-purple-500/20 rounded-lg border border-purple-400/30">
+                  <UserPlus className="text-purple-400" size={20} />
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-xs font-medium">{t('new_subscribers')}</p>
+                  <p className="text-purple-100 text-xl font-bold">{(overview.total_subs || 0).toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Engagement Card */}
+            <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-l-4 border-l-amber-400 border border-amber-500/20 rounded-xl p-4 hover:border-amber-400/40 transition-all duration-300">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-amber-500/20 rounded-lg border border-amber-400/30">
+                  <Sparkles className="text-amber-400" size={20} />
+                </div>
+                <div>
+                  <p className="text-zinc-400 text-xs font-medium">Engagement</p>
+                  <p className="text-amber-100 text-xl font-bold">
+                    {((overview.total_likes + overview.total_comments) / Math.max(overview.total_views, 1) * 100).toFixed(1)}%
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex-1 text-center md:text-left">
-            <h3 className={`text-${color}-400 font-semibold text-lg mb-1 flex items-center justify-center md:justify-start gap-2`}>
-              <Icon size={18} />
-              {label}
+          {/* Retention & Swipe Rate */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            
+            {/* Retention Rate */}
+            <div className="bg-gradient-to-br from-green-600/25 via-emerald-500/15 to-green-600/5 border border-green-500/40 rounded-2xl p-6">
+              <div className="flex flex-col items-center text-center">
+                {/* Circle Progress */}
+                <div className="relative mb-4">
+                  <svg width="140" height="140" className="transform -rotate-90">
+                    <circle
+                      cx="70" cy="70" r="55"
+                      stroke="rgba(34, 197, 94, 0.2)"
+                      strokeWidth="10"
+                      fill="none"
+                    />
+                    <circle
+                      cx="70" cy="70" r="55"
+                      stroke="url(#greenGrad)"
+                      strokeWidth="12"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={`${2 * Math.PI * 55}`}
+                      strokeDashoffset={`${2 * Math.PI * 55 * (1 - Math.min(overview.avg_retention || 0, 100) / 100)}`}
+                      className="drop-shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                    />
+                    <defs>
+                      <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4ade80" />
+                        <stop offset="100%" stopColor="#22c55e" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-3xl font-bold text-green-400">{(overview.avg_retention || 0).toFixed(1)}%</span>
+                    <Target className="text-green-400/60 mt-1" size={18} />
+                  </div>
+                </div>
+                
+                <h3 className="text-green-400 font-semibold text-lg flex items-center gap-2 mb-1">
+                  <Target size={18} />
+                  {t('avg_retention_rate')}
+                </h3>
+                <p className="text-zinc-400 text-sm mb-3">Script effectiveness (3-30s nézettség)</p>
+                <div className="flex items-center gap-2">
+                  <Badge className={`${(overview.avg_retention || 0) >= 60 ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'} border`}>
+                    {(overview.avg_retention || 0) >= 60 ? t('excellent') : t('improvable')}
+                  </Badge>
+                  <span className="text-xs text-zinc-500">target: 60%+</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Swipe Rate */}
+            <div className="bg-gradient-to-br from-purple-600/25 via-violet-500/15 to-purple-600/5 border border-purple-500/40 rounded-2xl p-6">
+              <div className="flex flex-col items-center text-center">
+                {/* Circle Progress */}
+                <div className="relative mb-4">
+                  <svg width="140" height="140" className="transform -rotate-90">
+                    <circle
+                      cx="70" cy="70" r="55"
+                      stroke="rgba(168, 85, 247, 0.2)"
+                      strokeWidth="10"
+                      fill="none"
+                    />
+                    <circle
+                      cx="70" cy="70" r="55"
+                      stroke="url(#purpleGrad)"
+                      strokeWidth="12"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={`${2 * Math.PI * 55}`}
+                      strokeDashoffset={`${2 * Math.PI * 55 * (1 - Math.min(overview.avg_swipe_rate || 0, 100) / 100)}`}
+                      className="drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+                    />
+                    <defs>
+                      <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#c4b5fd" />
+                        <stop offset="100%" stopColor="#8b5cf6" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-3xl font-bold text-purple-400">{(overview.avg_swipe_rate || 0).toFixed(1)}%</span>
+                    <Zap className="text-purple-400/60 mt-1" size={18} />
+                  </div>
+                </div>
+                
+                <h3 className="text-purple-400 font-semibold text-lg flex items-center gap-2 mb-1">
+                  <Zap size={18} />
+                  {t('avg_swipe_rate')}
+                </h3>
+                <p className="text-zinc-400 text-sm mb-3">Hook effectiveness (0-3s megtartás)</p>
+                <div className="flex items-center gap-2">
+                  <Badge className={`${(overview.avg_swipe_rate || 0) >= 70 ? 'bg-purple-500/20 text-purple-400 border-purple-500/30' : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'} border`}>
+                    {(overview.avg_swipe_rate || 0) >= 70 ? t('excellent') : t('improvable')}
+                  </Badge>
+                  <span className="text-xs text-zinc-500">target: 70%+</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Hook Performance */}
+      {hookPerformance.length > 0 && (
+        <div className="bg-zinc-900/60 backdrop-blur border border-zinc-800 rounded-2xl overflow-hidden">
+          <div className="p-5 border-b border-zinc-800">
+            <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+              <Zap className="text-amber-400" size={20} />
+              {t('hook_type_performance')}
             </h3>
-            <p className="text-zinc-400 text-sm mb-3">{description}</p>
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <Badge className={isGood ? `bg-${color}-400/20 text-${color}-400 border border-${color}-400/30` : 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30'}>
-                {isGood ? t('excellent') : t('improvable')}
-              </Badge>
-              <span className="text-xs text-zinc-500">
-                target: {target}%+
-              </span>
-            </div>
           </div>
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <>
-      <style>{styles}</style>
-      <div className="analytics-wrapper space-y-8" data-testid="analytics-page">
-        {/* Header */}
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="header-badge p-2.5 rounded-xl">
-              <Activity className="text-amber-400" size={26} />
-            </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-white">
-                Analytics Dashboard
-              </h1>
-              <p className="text-zinc-400 text-sm">
-                Performance metrikák és insights
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {overview && (
-          <>
-            {/* Bento Grid Layout for Stats */}
-            <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-              {/* Hero stat - spans 2 columns on mobile */}
-              <div className="col-span-2">
-                <HeroStat
-                  label={t('total_views')}
-                  value={overview.total_views || 0}
-                  icon={Eye}
-                  subtitle="Összes megtekintés"
-                  accentColor="blue"
+          <div className="p-4 space-y-3">
+            {hookPerformance.map((item, idx) => (
+              <div 
+                key={idx} 
+                className="relative bg-zinc-800/50 rounded-xl p-4 hover:bg-zinc-800/70 transition-colors"
+              >
+                <div 
+                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-amber-500/20 to-transparent rounded-l-xl"
+                  style={{ width: `${Math.min(item.avg_retention || 0, 100)}%` }}
                 />
-              </div>
-              
-              {/* Compact stats */}
-              <CompactStat
-                label={t('total_likes')}
-                value={overview.total_likes || 0}
-                icon={Heart}
-                color="red"
-                index={0}
-              />
-              <CompactStat
-                label={t('total_comments')}
-                value={overview.total_comments || 0}
-                icon={MessageCircle}
-                color="green"
-                index={1}
-              />
-              <CompactStat
-                label={t('new_subscribers')}
-                value={overview.total_subs || 0}
-                icon={UserPlus}
-                color="purple"
-                index={2}
-              />
-              
-              {/* Engagement score */}
-              <div className="stat-card stat-card-amber rounded-xl p-4 hover-lift" data-testid="engagement-score">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2.5 rounded-lg bg-amber-400/15 border border-amber-400/20">
-                    <Sparkles className="text-amber-400" size={20} />
+                <div className="relative flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs">
+                        {item.hook_type || 'Unknown'}
+                      </Badge>
+                      <span className="text-xs text-zinc-500">{item.count}× használva</span>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div>
+                        <p className="text-xs text-zinc-500">{t('retention')}</p>
+                        <p className="text-lg font-bold text-white">{(item.avg_retention || 0).toFixed(1)}%</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-zinc-500">Views</p>
+                        <p className="text-lg font-bold text-white">{(item.total_views || 0).toLocaleString()}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-zinc-400 text-xs font-medium">Engagement</p>
-                    <p className="text-amber-100 text-xl font-bold">
-                      {((overview.total_likes + overview.total_comments) / Math.max(overview.total_views, 1) * 100).toFixed(1)}%
-                    </p>
+                  <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-zinc-700/50">
+                    {(item.avg_retention || 0) >= 50 ? (
+                      <TrendingUp className="text-green-400" size={20} />
+                    ) : (
+                      <TrendingDown className="text-red-400" size={20} />
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Key Metrics - Circular Progress */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-              <MetricRing
-                value={overview.avg_retention || 0}
-                label={t('avg_retention_rate')}
-                description="Script effectiveness (3-30s nézettség)"
-                color="green"
-                target={60}
-                Icon={Target}
-              />
-              <MetricRing
-                value={overview.avg_swipe_rate || 0}
-                label={t('avg_swipe_rate')}
-                description="Hook effectiveness (0-3s megtartás)"
-                color="purple"
-                target={70}
-                Icon={Zap}
-              />
-            </div>
-          </>
-        )}
-
-        {/* Hook Type Performance */}
-        {hookPerformance.length > 0 && (
-          <div className="relative z-10 glass-panel rounded-2xl overflow-hidden" data-testid="hook-performance-section">
-            <div className="p-4 md:p-6 border-b border-white/5">
-              <h3 className="text-white font-semibold text-lg flex items-center gap-2">
-                <Zap className="text-amber-400" size={20} />
-                {t('hook_type_performance')}
-              </h3>
-            </div>
-            <div className="p-4 md:p-6 space-y-3">
-              {hookPerformance.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="relative overflow-hidden rounded-xl bg-zinc-800/30 p-4 hover-lift group"
-                  data-testid={`hook-item-${idx}`}
-                >
-                  {/* Background progress bar */}
-                  <div 
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-amber-400/10 to-transparent transition-all duration-500"
-                    style={{ width: `${Math.min(item.avg_retention || 0, 100)}%` }}
-                  />
-                  
-                  <div className="relative flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center flex-wrap gap-2 mb-2">
-                        <Badge className="bg-amber-400/20 text-amber-400 text-xs font-semibold">
-                          {item.hook_type || 'Unknown'}
-                        </Badge>
-                        <span className="text-xs text-zinc-500">{item.count}× használva</span>
-                      </div>
-                      <div className="flex items-center gap-6">
-                        <div>
-                          <p className="text-xs text-zinc-500">{t('retention')}</p>
-                          <p className="text-lg font-bold text-white">{item.avg_retention?.toFixed(1)}%</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-zinc-500">Views</p>
-                          <p className="text-lg font-bold text-white">{item.total_views?.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Trend indicator */}
-                    <div className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-zinc-700/50">
-                      {(item.avg_retention || 0) >= 50 ? (
-                        <TrendingUp className="text-green-400" size={20} />
-                      ) : (
-                        <TrendingDown className="text-red-400" size={20} />
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Time Series */}
-        {timeSeries.length > 0 && (
-          <div className="relative z-10 glass-panel rounded-2xl overflow-hidden" data-testid="time-series-section">
-            <div className="p-4 md:p-6 border-b border-white/5">
-              <h3 className="text-white font-semibold text-lg flex items-center gap-2">
-                <Activity className="text-blue-400" size={20} />
-                {t('latest_metrics')}
-              </h3>
-            </div>
-            <div className="divide-y divide-white/5">
-              {timeSeries.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="p-4 hover:bg-white/5 transition-colors flex items-center justify-between"
-                  data-testid={`time-series-item-${idx}`}
-                >
-                  <span className="text-zinc-400 text-sm">
-                    {new Date(item.created_at).toLocaleDateString('hu-HU', { 
-                      month: 'short', 
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </span>
-                  <div className="flex items-center gap-4 md:gap-6">
-                    <div className="flex items-center gap-1.5">
-                      <Eye size={14} className="text-blue-400" />
-                      <span className="text-white text-sm font-medium">{item.views}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Heart size={14} className="text-red-400" />
-                      <span className="text-white text-sm font-medium">{item.likes}</span>
-                    </div>
-                    <Badge className="bg-green-400/10 text-green-400 text-xs">
-                      {item.retention_percent?.toFixed(1)}%
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Empty State */}
-        {!overview && (
-          <div className="relative z-10 glass-panel rounded-2xl p-12 text-center" data-testid="empty-state">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-zinc-800/50 mb-6">
-              <TrendingUp className="text-zinc-500" size={40} />
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">
-              {t('no_analytics_yet')}
+      {/* Time Series */}
+      {timeSeries.length > 0 && (
+        <div className="bg-zinc-900/60 backdrop-blur border border-zinc-800 rounded-2xl overflow-hidden">
+          <div className="p-5 border-b border-zinc-800">
+            <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+              <Activity className="text-blue-400" size={20} />
+              {t('latest_metrics')}
             </h3>
-            <p className="text-zinc-400 max-w-md mx-auto">
-              {t('upload_csv_or_add_metrics')}
-            </p>
           </div>
-        )}
-      </div>
-    </>
+          <div className="divide-y divide-zinc-800">
+            {timeSeries.map((item, idx) => (
+              <div key={idx} className="p-4 hover:bg-zinc-800/30 transition-colors flex items-center justify-between">
+                <span className="text-zinc-400 text-sm">
+                  {new Date(item.created_at).toLocaleDateString('hu-HU', { 
+                    month: 'short', 
+                    day: 'numeric'
+                  })}
+                </span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <Eye size={14} className="text-blue-400" />
+                    <span className="text-white text-sm font-medium">{item.views}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Heart size={14} className="text-red-400" />
+                    <span className="text-white text-sm font-medium">{item.likes}</span>
+                  </div>
+                  <Badge className="bg-green-500/20 text-green-400 border border-green-500/30 text-xs">
+                    {(item.retention_percent || 0).toFixed(1)}%
+                  </Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!overview && (
+        <div className="bg-zinc-900/60 backdrop-blur border border-zinc-800 rounded-2xl p-12 text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-zinc-800/50 mb-6">
+            <TrendingUp className="text-zinc-500" size={40} />
+          </div>
+          <h3 className="text-xl font-semibold text-white mb-2">
+            {t('no_analytics_yet')}
+          </h3>
+          <p className="text-zinc-400 max-w-md mx-auto">
+            {t('upload_csv_or_add_metrics')}
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
