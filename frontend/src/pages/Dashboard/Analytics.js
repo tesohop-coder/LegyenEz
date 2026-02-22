@@ -247,10 +247,10 @@ export default function Analytics() {
     const isGood = value >= target;
 
     return (
-      <div className="gradient-border rounded-2xl p-6 hover-lift" data-testid={`metric-ring-${label.toLowerCase().replace(/\s/g, '-')}`}>
+      <div className={`metric-card ${color} rounded-2xl p-6 hover-lift`} data-testid={`metric-ring-${label.toLowerCase().replace(/\s/g, '-')}`}>
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
           {/* Circular Progress */}
-          <div className="relative flex-shrink-0">
+          <div className={`relative flex-shrink-0 ring-glow-${color}`}>
             <svg width="120" height="120" className="transform -rotate-90">
               {/* Background circle */}
               <circle
@@ -267,7 +267,7 @@ export default function Analytics() {
                 cy="60"
                 r="45"
                 stroke={`url(#gradient-${color})`}
-                strokeWidth="8"
+                strokeWidth="10"
                 fill="none"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
@@ -276,15 +276,15 @@ export default function Analytics() {
               />
               <defs>
                 <linearGradient id={`gradient-${color}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={color === 'green' ? '#4ade80' : '#a78bfa'} />
+                  <stop offset="0%" stopColor={color === 'green' ? '#4ade80' : '#c4b5fd'} />
                   <stop offset="100%" stopColor={color === 'green' ? '#22c55e' : '#8b5cf6'} />
                 </linearGradient>
               </defs>
             </svg>
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-2xl font-bold text-white">{value.toFixed(1)}%</span>
-              <Icon className={`text-${color}-400 mt-1`} size={16} />
+              <span className={`text-2xl font-bold text-${color}-400`}>{value.toFixed(1)}%</span>
+              <Icon className={`text-${color}-400/60 mt-1`} size={16} />
             </div>
           </div>
 
@@ -296,7 +296,7 @@ export default function Analytics() {
             </h3>
             <p className="text-zinc-400 text-sm mb-3">{description}</p>
             <div className="flex items-center justify-center md:justify-start gap-2">
-              <Badge className={isGood ? `bg-${color}-400/10 text-${color}-400` : 'bg-yellow-400/10 text-yellow-400'}>
+              <Badge className={isGood ? `bg-${color}-400/20 text-${color}-400 border border-${color}-400/30` : 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30'}>
                 {isGood ? t('excellent') : t('improvable')}
               </Badge>
               <span className="text-xs text-zinc-500">
