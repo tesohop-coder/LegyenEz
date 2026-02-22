@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
 import {
   TrendingUp,
   TrendingDown,
@@ -12,19 +13,42 @@ import {
   Zap,
   Target,
   Sparkles,
-  Activity
+  Activity,
+  Youtube,
+  RefreshCw,
+  Link,
+  Unlink,
+  Play,
+  Clock,
+  Users
 } from 'lucide-react';
 
 export default function Analytics() {
-  const { api } = useAuth();
+  const { api, user } = useAuth();
   const { t } = useLanguage();
   const [overview, setOverview] = useState(null);
   const [hookPerformance, setHookPerformance] = useState([]);
   const [timeSeries, setTimeSeries] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // YouTube state
+  const [youtubeConnected, setYoutubeConnected] = useState(false);
+  const [youtubeChannel, setYoutubeChannel] = useState(null);
+  const [youtubeVideos, setYoutubeVideos] = useState([]);
+  const [syncing, setSyncing] = useState(false);
+  const [showYoutubeVideos, setShowYoutubeVideos] = useState(false);
 
   useEffect(() => {
     fetchAnalytics();
+    checkYoutubeConnection();
+    
+    // Check URL params for YouTube callback
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('youtube') === 'connected') {
+      checkYoutubeConnection();
+      // Clean URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
   }, []);
 
   const fetchAnalytics = async () => {
@@ -42,6 +66,63 @@ export default function Analytics() {
       console.error('Failed to fetch analytics:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkYoutubeConnection = async () => {
+    try {
+      const response = await api.get(`/youtube/status/${user?.id}`);
+      if (response.data.connected) {
+        setYoutubeConnected(true);
+        setYoutubeChannel(response.data.channel);
+        // Load synced videos
+        loadSyncedVideos();
+      }
+    } catch (error) {
+      console.error('Error checking YouTube connection:', error);
+    }
+  };
+
+  const connectYoutube = async () => {
+    try {
+      const response = await api.get(`/youtube/auth?user_id=${user?.id}`);
+      window.location.href = response.data.auth_url;
+    } catch (error) {
+      console.error('Error starting YouTube auth:', error);
+    }
+  };
+
+  const disconnectYoutube = async () => {
+    try {
+      await api.delete(`/youtube/disconnect/${user?.id}`);
+      setYoutubeConnected(false);
+      setYoutubeChannel(null);
+      setYoutubeVideos([]);
+    } catch (error) {
+      console.error('Error disconnecting YouTube:', error);
+    }
+  };
+
+  const syncYoutubeData = async () => {
+    setSyncing(true);
+    try {
+      const response = await api.post(`/youtube/sync/${user?.id}`);
+      setYoutubeVideos(response.data.videos);
+      alert(`Sikeresen szinkronizálva: ${response.data.synced_count} videó!`);
+    } catch (error) {
+      console.error('Error syncing YouTube data:', error);
+      alert('Hiba a szinkronizálás során');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const loadSyncedVideos = async () => {
+    try {
+      const response = await api.get(`/youtube/synced-videos/${user?.id}?shorts_only=true`);
+      setYoutubeVideos(response.data.videos);
+    } catch (error) {
+      console.error('Error loading synced videos:', error);
     }
   };
 
