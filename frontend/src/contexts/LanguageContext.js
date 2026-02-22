@@ -1056,6 +1056,9 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('language', language);
+    // Sync i18n language when LanguageContext language changes
+    const langCode = language === 'us' ? 'en' : language;
+    i18n.changeLanguage(langCode);
   }, [language]);
 
   // Create t function that depends on current language
