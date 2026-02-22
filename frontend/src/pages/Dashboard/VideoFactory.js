@@ -73,7 +73,8 @@ export default function VideoFactory() {
   useEffect(() => {
     fetchData();
     loadVoicePreferences();
-    const interval = setInterval(fetchVideos, 10000); // Poll every 10s
+    // Poll every 5 seconds (reduced from 10s for faster updates)
+    const interval = setInterval(fetchVideos, 5000);
     return () => clearInterval(interval);
   }, []);
 
