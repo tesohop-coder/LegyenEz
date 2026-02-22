@@ -390,6 +390,20 @@ const translations = {
     no_videos_yet: 'Noch keine generierten Videos',
     select_and_generate: 'Wähle ein Skript und starte die Videogenerierung!',
     
+    // Toast messages
+    voice_settings_loaded: 'Gespeicherte Spracheinstellungen geladen!',
+    voice_settings_saved: 'Spracheinstellungen gespeichert! Sie werden beim nächsten Mal automatisch geladen.',
+    save_error: 'Fehler beim Speichern',
+    download_starting: 'Download startet...',
+    download_success: 'Download erfolgreich!',
+    download_error: 'Download fehlgeschlagen',
+    script_updated: 'Skript erfolgreich aktualisiert!',
+    select_script_error: 'Bitte wählen Sie ein Skript aus!',
+    select_voice_error: 'Wählen Sie eine Stimme oder geben Sie eine benutzerdefinierte Voice-ID ein!',
+    video_generation_started: '🎬 Videogenerierung gestartet! Läuft im Hintergrund, Sie können die Seite weiter nutzen.',
+    video_generation_timeout: '⏱️ Der API-Aufruf hat das Zeitlimit überschritten, aber die Videogenerierung wurde wahrscheinlich gestartet. Überprüfen Sie die Videoliste!',
+    video_generation_failed: 'Videogenerierung fehlgeschlagen',
+    
     // Analytics
     analytics: 'Analytics-Dashboard',
     analytics_subtitle: 'Leistungsmetriken und Einblicke',
