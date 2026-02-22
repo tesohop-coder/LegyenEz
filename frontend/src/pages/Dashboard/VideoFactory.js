@@ -497,7 +497,7 @@ export default function VideoFactory() {
 
                 <div>
                   <div className="flex justify-between mb-2">
-                    <Label className="text-zinc-300">Similarity Boost</Label>
+                    <Label className="text-zinc-300">{t('similarity_boost')}</Label>
                     <span className="text-zinc-400 text-sm">{voiceSettings.similarity_boost.toFixed(2)}</span>
                   </div>
                   <Slider
@@ -512,7 +512,7 @@ export default function VideoFactory() {
 
                 <div>
                   <div className="flex justify-between mb-2">
-                    <Label className="text-zinc-300">Style</Label>
+                    <Label className="text-zinc-300">{t('style')}</Label>
                     <span className="text-zinc-400 text-sm">{voiceSettings.style.toFixed(2)}</span>
                   </div>
                   <Slider
@@ -527,7 +527,7 @@ export default function VideoFactory() {
 
                 <div>
                   <div className="flex justify-between mb-2">
-                    <Label className="text-zinc-300">Speed (Sebesség)</Label>
+                    <Label className="text-zinc-300">{t('speed')}</Label>
                     <span className="text-zinc-400 text-sm">{voiceSettings.speed.toFixed(2)}x</span>
                   </div>
                   <Slider
@@ -539,7 +539,7 @@ export default function VideoFactory() {
                     className="w-full"
                   />
                   <p className="text-xs text-zinc-500 mt-1">
-                    0.25x (nagyon lassú) - 2.0x (nagyon gyors)
+                    {t('speed_hint')}
                   </p>
                 </div>
               </div>
