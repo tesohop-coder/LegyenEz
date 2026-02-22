@@ -212,44 +212,49 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                     'end': (i + 1) * word_duration
                 })
         
-        # IMPROVED KARAOKE: Sliding window (csak 2-3 szó látszik egyszerre)
-        # Nem csoportok, hanem folyamatos ablak az aktuális szó körül
-        all_words = word_timings
+        # Group words (4-5 per line) - VISSZAÁLLÍTVA az előző verzióra
+        groups = []
+        current_group = []
+        for wt in word_timings:
+            current_group.append(wt)
+            if len(current_group) >= 4:
+                groups.append(current_group)
+                current_group = []
+        if current_group:
+            groups.append(current_group)
         
-        # Generate dialogue - sliding window approach
-        # Minden szóhoz: előző 1 szó (ha van) + JELENLEGI (sárga) + következő 1 szó (ha van)
-        for idx, current_word in enumerate(all_words):
-            word_start = current_word['start']
-            word_end = current_word['end']
-            
-            # Build sliding window: max 3 szó
-            # [előző] [JELENLEGI - SÁRGA] [következő]
-            parts = []
-            
-            # Előző szó (ha van) - FEHÉR
-            if idx > 0:
-                prev_word = all_words[idx - 1]
-                parts.append("{\\c&HFFFFFF&}" + prev_word['word'].upper())
-            
-            # JELENLEGI szó - SÁRGA
-            parts.append("{\\c&H00FFFF&}" + current_word['word'].upper())
-            
-            # Következő szó (ha van) - FEHÉR
-            if idx < len(all_words) - 1:
-                next_word = all_words[idx + 1]
-                parts.append("{\\c&HFFFFFF&}" + next_word['word'].upper())
-            
-            # Add \an5 tag to FORCE middle-center alignment
-            line_text = "{\\an5}" + " ".join(parts)
-            start = FFmpegService.format_ass_time(word_start)
-            end = FFmpegService.format_ass_time(word_end)
-            
-            ass_content += f"Dialogue: 0,{start},{end},Default,,0,0,0,,{line_text}\n"
+        # Generate dialogue - each word gets its own line showing the WHOLE group
+        # with ONLY that word highlighted
+        for group in groups:
+            for idx, current_word in enumerate(group):
+                word_start = current_word['start']
+                word_end = current_word['end']
+                
+                # Build text: current word YELLOW, all others WHITE
+                # Using {\c&HBBGGRR&} format
+                # YELLOW = &H00FFFF (BGR)
+                # WHITE = &HFFFFFF (BGR)
+                # All text is UPPERCASE
+                parts = []
+                for i, wt in enumerate(group):
+                    if i == idx:
+                        # CURRENT word - YELLOW - UPPERCASE
+                        parts.append("{\\c&H00FFFF&}" + wt['word'].upper())
+                    else:
+                        # Other words - WHITE - UPPERCASE
+                        parts.append("{\\c&HFFFFFF&}" + wt['word'].upper())
+                
+                # Add \an5 tag to FORCE middle-center alignment
+                line_text = "{\\an5}" + " ".join(parts)
+                start = FFmpegService.format_ass_time(word_start)
+                end = FFmpegService.format_ass_time(word_end)
+                
+                ass_content += f"Dialogue: 0,{start},{end},Default,,0,0,0,,{line_text}\n"
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(ass_content)
         
-        logger.info(f"Created karaoke subtitles with SLIDING WINDOW (2-3 words visible): {output_path}")
+        logger.info(f"Created karaoke subtitles: {output_path}")
     
     @staticmethod
     def format_ass_time(seconds: float) -> str:
