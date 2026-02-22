@@ -338,7 +338,7 @@ export default function Analytics() {
         {overview && (
           <>
             {/* Bento Grid Layout for Stats */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+            <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
               {/* Hero stat - spans 2 columns on mobile */}
               <div className="col-span-2">
                 <HeroStat
@@ -374,9 +374,9 @@ export default function Analytics() {
               />
               
               {/* Engagement score - calculated metric */}
-              <div className="glassmorphism rounded-xl p-4 hover-lift" data-testid="engagement-score">
+              <div className="compact-stat-card amber rounded-xl p-4 hover-lift" data-testid="engagement-score">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2.5 rounded-lg bg-gradient-to-br from-amber-400/20 to-orange-600/10">
+                  <div className="p-2.5 rounded-lg bg-amber-400/20">
                     <Sparkles className="text-amber-400" size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -390,7 +390,7 @@ export default function Analytics() {
             </div>
 
             {/* Key Metrics - Circular Progress */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
               <MetricRing
                 value={overview.avg_retention || 0}
                 label={t('avg_retention_rate')}
