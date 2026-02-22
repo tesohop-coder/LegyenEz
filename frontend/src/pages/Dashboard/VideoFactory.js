@@ -296,10 +296,10 @@ export default function VideoFactory() {
       {/* Header */}
       <div>
         <h1 className="text-4xl font-bold text-white mb-2">
-          Videó Gyár
+          {t('video_factory')}
         </h1>
         <p className="text-zinc-400">
-          AI-powered videó generálás: TTS + B-roll + karaoke feliratok
+          {t('video_factory_subtitle')}
         </p>
       </div>
 
