@@ -312,7 +312,7 @@ export default function VideoFactory() {
               <CardTitle className="text-white flex items-center justify-between">
                 <div className="flex items-center">
                   <Film className="mr-2 text-amber-400" size={20} />
-                  Script Kiválasztása
+                  {t('select_script')}
                 </div>
                 {selectedScriptData && !isEditingScript && (
                   <Button
