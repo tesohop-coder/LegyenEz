@@ -276,10 +276,10 @@ export default function VideoFactory() {
     };
 
     const labels = {
-      queued: 'Sorban',
-      processing: 'Generálás...',
-      completed: 'Kész',
-      failed: 'Hiba'
+      queued: t('queued'),
+      processing: t('processing'),
+      completed: t('completed'),
+      failed: t('failed')
     };
 
     return (
