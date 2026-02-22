@@ -35,6 +35,7 @@ import {
 
 export default function VideoFactory() {
   const { api } = useAuth();
+  const { t } = useLanguage(); // Get translation function
   const [scripts, setScripts] = useState([]);
   const [videos, setVideos] = useState([]);
   const [selectedScript, setSelectedScript] = useState('');
