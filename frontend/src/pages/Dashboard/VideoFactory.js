@@ -551,28 +551,28 @@ export default function VideoFactory() {
             <CardHeader>
               <CardTitle className="text-white flex items-center">
                 <ImageIcon className="mr-2 text-purple-400" size={20} />
-                B-roll és Zene
+                {t('broll_and_music')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label className="text-zinc-300">B-roll Keresési Kulcsszó</Label>
+                <Label className="text-zinc-300">{t('broll_search')}</Label>
                 <Input
                   type="text"
                   value={brollSearch}
                   onChange={(e) => setBrollSearch(e.target.value)}
-                  placeholder="Pl: faith prayer spiritual (opcionális)"
+                  placeholder={t('broll_search_placeholder')}
                   className="bg-zinc-800 border-zinc-700 text-white mt-1"
                 />
               </div>
 
               <div>
-                <Label className="text-zinc-300">Háttérzene URL (opcionális)</Label>
+                <Label className="text-zinc-300">{t('background_music')}</Label>
                 <Input
                   type="text"
                   value={backgroundMusic}
                   onChange={(e) => setBackgroundMusic(e.target.value)}
-                  placeholder="https://example.com/music.mp3"
+                  placeholder={t('background_music_placeholder')}
                   className="bg-zinc-800 border-zinc-700 text-white mt-1"
                 />
               </div>
@@ -588,12 +588,12 @@ export default function VideoFactory() {
             {generating ? (
               <>
                 <Loader2 className="mr-2 animate-spin" size={20} />
-                Generálás folyamatban...
+                {t('generating')}
               </>
             ) : (
               <>
                 <Play className="mr-2" size={20} />
-                Videó Generálás Indítása
+                {t('generate_video')}
               </>
             )}
           </Button>
