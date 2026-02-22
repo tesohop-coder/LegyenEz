@@ -37,7 +37,7 @@ export default function VideoFactory() {
   const [scripts, setScripts] = useState([]);
   const [videos, setVideos] = useState([]);
   const [selectedScript, setSelectedScript] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Changed from true - no blocking loading screen
   const [generating, setGenerating] = useState(false);
 
   // Script Editing State
