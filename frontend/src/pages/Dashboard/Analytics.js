@@ -205,16 +205,16 @@ export default function Analytics() {
   const HeroStat = ({ label, value, icon: Icon, subtitle, accentColor = 'amber' }) => (
     <div className="stat-card-hero rounded-2xl p-6 hover-lift" data-testid="hero-stat-card">
       <div className="flex items-start justify-between mb-4">
-        <div className={`p-3 rounded-xl bg-${accentColor}-400/20`}>
-          <Icon className={`text-${accentColor}-400`} size={28} />
+        <div className="p-3 rounded-xl bg-blue-500/30 backdrop-blur-sm">
+          <Icon className="text-blue-300" size={28} />
         </div>
-        <Sparkles className="text-amber-400/50" size={20} />
+        <Sparkles className="text-cyan-400/70" size={20} />
       </div>
-      <p className="text-zinc-400 text-sm font-medium mb-1">{label}</p>
+      <p className="text-blue-200/80 text-sm font-medium mb-1">{label}</p>
       <h2 className="text-4xl md:text-5xl font-bold number-highlight mb-2">
         {typeof value === 'number' ? value.toLocaleString() : value}
       </h2>
-      {subtitle && <p className="text-xs text-zinc-500">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-blue-300/60">{subtitle}</p>}
     </div>
   );
 
