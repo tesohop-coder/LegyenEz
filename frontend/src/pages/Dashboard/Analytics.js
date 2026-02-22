@@ -48,36 +48,36 @@ const styles = `
   .bg-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
+    filter: blur(60px);
+    opacity: 0.6;
     animation: blob-move 15s ease-in-out infinite;
     pointer-events: none;
   }
   
   .bg-blob-1 {
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
-    top: -50px;
-    right: -100px;
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #fbbf24, #f97316);
+    top: -100px;
+    right: -80px;
     animation-delay: 0s;
   }
   
   .bg-blob-2 {
-    width: 250px;
-    height: 250px;
-    background: linear-gradient(135deg, #8b5cf6, #a855f7);
-    top: 40%;
-    left: -80px;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    top: 35%;
+    left: -100px;
     animation-delay: -5s;
   }
   
   .bg-blob-3 {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     background: linear-gradient(135deg, #3b82f6, #06b6d4);
-    bottom: 20%;
-    right: -60px;
+    bottom: 10%;
+    right: -80px;
     animation-delay: -10s;
   }
   
