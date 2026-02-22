@@ -413,7 +413,7 @@ export default function Analytics() {
 
         {/* Hook Type Performance */}
         {hookPerformance.length > 0 && (
-          <div className="glassmorphism rounded-2xl overflow-hidden" data-testid="hook-performance-section">
+          <div className="relative z-10 glassmorphism rounded-2xl overflow-hidden" data-testid="hook-performance-section">
             <div className="p-4 md:p-6 border-b border-white/5">
               <h3 className="text-white font-semibold text-lg flex items-center gap-2">
                 <Zap className="text-amber-400" size={20} />
