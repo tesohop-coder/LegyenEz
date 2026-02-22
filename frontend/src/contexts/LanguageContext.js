@@ -599,6 +599,20 @@ const translations = {
     no_videos_yet: 'No generated videos yet',
     select_and_generate: 'Select a script and start video generation!',
     
+    // Toast messages
+    voice_settings_loaded: 'Loaded saved voice settings!',
+    voice_settings_saved: 'Voice settings saved! They will auto-load next time.',
+    save_error: 'Error saving',
+    download_starting: 'Download starting...',
+    download_success: 'Download successful!',
+    download_error: 'Download failed',
+    script_updated: 'Script successfully updated!',
+    select_script_error: 'Please select a script!',
+    select_voice_error: 'Select a voice or enter a custom Voice ID!',
+    video_generation_started: '🎬 Video generation started! Running in background, you can use the page.',
+    video_generation_timeout: '⏱️ API call timed out, but video generation likely started. Check the videos list!',
+    video_generation_failed: 'Video generation failed',
+    
     // Analytics
     analytics: 'Analytics Dashboard',
     analytics_subtitle: 'Performance metrics and insights',
