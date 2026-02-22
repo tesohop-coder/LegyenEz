@@ -287,15 +287,10 @@ export default function Analytics() {
     <>
       <style>{styles}</style>
       <div className="analytics-wrapper space-y-8" data-testid="analytics-page">
-        {/* Background gradients */}
-        <div className="gradient-bg-top" />
-        <div className="gradient-bg-left" />
-        <div className="gradient-bg-bottom" />
-        
         {/* Header */}
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2.5 bg-gradient-to-br from-amber-400/25 to-orange-500/15 rounded-xl border border-amber-400/20">
+            <div className="header-badge p-2.5 rounded-xl">
               <Activity className="text-amber-400" size={26} />
             </div>
             <div>
