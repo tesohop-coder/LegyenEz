@@ -305,7 +305,7 @@ export default function Analytics() {
       )}
 
       {overview && (
-        <>
+        <div className="space-y-6">
           {/* Main Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             
